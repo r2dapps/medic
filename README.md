@@ -5,8 +5,8 @@
 # MEDIC
 ### Offline-First Family Medicine Routine &amp; Inventory Guardian
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Launch%20MEDIC-0F766E?style=for-the-badge&logo=googlechrome&logoColor=white)](https://razeltech.github.io/medic/)
-[![PWA Ready](https://img.shields.io/badge/PWA-Offline%20Capable-14B8A6?style=for-the-badge&logo=pwa&logoColor=white)](https://razeltech.github.io/medic/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Launch%20MEDIC-0F766E?style=for-the-badge&logo=googlechrome&logoColor=white)](https://r2dapps.github.io/medic/)
+[![PWA Ready](https://img.shields.io/badge/PWA-Offline%20Capable-14B8A6?style=for-the-badge&logo=pwa&logoColor=white)](https://r2dapps.github.io/medic/)
 [![Medical Standards](https://img.shields.io/badge/Standard-NLEM%202022%20%7C%20CDSCO-teal?style=for-the-badge)](https://cdsco.gov.in/)
 [![Voice TTS](https://img.shields.io/badge/Speech%20Engine-Indian%20Natural%20Accent-0D9488?style=for-the-badge)](#voice-tts)
 [![Zero Cloud Privacy](https://img.shields.io/badge/Privacy-100%25%20Client--Side%20IndexedDB-10B981?style=for-the-badge)](#privacy-architecture)
@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <a href="https://razeltech.github.io/medic/"><strong>[ Launch Web Application ]</strong></a> &nbsp;&bull;&nbsp;
+  <a href="https://r2dapps.github.io/medic/"><strong>[ Launch Web Application ]</strong></a> &nbsp;&bull;&nbsp;
   <a href="#core-capabilities"><strong>[ Core Capabilities ]</strong></a> &nbsp;&bull;&nbsp;
   <a href="#clinical-formulary-database"><strong>[ Medicine Catalogue ]</strong></a> &nbsp;&bull;&nbsp;
   <a href="#whatsapp-pharmacy-refills"><strong>[ WhatsApp Refills ]</strong></a> &nbsp;&bull;&nbsp;
@@ -33,8 +33,8 @@
 
 | Metric | Target Specification |
 | :--- | :--- |
-| **Live Web Application** | [https://razeltech.github.io/medic/](https://razeltech.github.io/medic/) |
-| **Primary Repository** | [https://github.com/razeltech/medic](https://github.com/razeltech/medic) |
+| **Live Web Application** | [https://r2dapps.github.io/medic/](https://r2dapps.github.io/medic/) |
+| **Primary Repository** | [https://github.com/r2dapps/medic](https://github.com/r2dapps/medic) |
 | **Distribution Mirror** | [https://github.com/r2dapps/medic](https://github.com/r2dapps/medic) |
 | **Engineering Author** | **[Razel Tech](https://razeltech.github.io)** |
 | **Runtime Target** | Modern Web Browsers (Chrome, Edge, Safari, Firefox), Android PWA, iOS PWA |
@@ -145,7 +145,7 @@
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/razeltech/medic.git
+git clone https://github.com/r2dapps/medic.git
 cd medic
 ```
 
