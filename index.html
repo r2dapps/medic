@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>MEDIC — Offline-First Family Medicine Routine & Inventory Guardian</title>
+  <meta name="description" content="A resilient, 100% offline-first Progressive Web Application (PWA) tailored for Indian multi-generational households to track medical routines, stock depletion, OCR packaging, and pharmacy reorders with zero subscription fees, zero cloud surveillance, and authentic Indian accent voice guidance.">
+  <meta name="keywords" content="medic, medicine tracker, offline pwa, nlem 2022, cdsco, indian healthcare, pill reminder, family health routine, pharmacy refill, whatsapp medicine order, text-to-speech, indexeddb medical records">
+  <meta name="author" content="Razel Tech">
+  <link rel="canonical" href="https://razeltech.github.io/medic/">
+  
+  <!-- OpenGraph / Social Metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MEDIC">
+  <meta property="og:title" content="MEDIC — Offline-First Family Medicine Routine & Inventory Guardian">
+  <meta property="og:description" content="Offline-first family medicine routine scheduler, inventory stock guardian, NLEM/CDSCO Indian health standard intellisense, and natural voice dose assistant.">
+  <meta property="og:url" content="https://razeltech.github.io/medic/">
+  <meta property="og:image" content="https://razeltech.github.io/medic/banner.svg">
+  
+  <!-- Twitter Card Metadata -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MEDIC — Offline-First Family Medicine Routine & Inventory Guardian">
+  <meta name="twitter:description" content="Offline-first family medicine routine scheduler, inventory stock guardian, NLEM/CDSCO Indian health standard intellisense, and natural voice dose assistant.">
+  <meta name="twitter:image" content="https://razeltech.github.io/medic/banner.svg">
+  
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["MedicalWebApplication", "SoftwareApplication"],
+    "name": "MEDIC",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "All modern browsers (Android, iOS, Windows, macOS, Linux)",
+    "browserRequirements": "Requires HTML5, IndexedDB, and Web Audio API support",
+    "url": "https://razeltech.github.io/medic/",
+    "description": "Offline-first family medicine routine scheduler, inventory stock guardian, NLEM/CDSCO Indian health standard intellisense, and natural voice dose assistant.",
+    "author": {
+      "@type": "Organization",
+      "name": "Razel Tech",
+      "url": "https://razeltech.github.io"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    }
+  }
+  </script>
+  
+  <!-- MEDIC Favicon & PWA Manifest -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230F766E'/%3E%3Cpath d='M13 7a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6h6a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-6v6a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-6H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h6V7z' fill='%23FFFFFF'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0F766E">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="MEDIC">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            surface: {
+              DEFAULT: '#F8F9FA',
+              card: '#FFFFFF',
+              subtle: '#F1F3F5',
+              border: '#E9ECEF',
+            },
+            charcoal: {
+              DEFAULT: '#212529',
+              muted: '#6C757D',
+              light: '#ADB5BD',
+            },
+            teal: {
+              primary: '#0F766E',
+              subtle: '#E6FFFA',
+              dark: '#115E59'
+            },
+            status: {
+              success: '#2B8A3E',
+              warning: '#E67700',
+              danger: '#C92A2A',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Tesseract.js for OCR -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+  <style>
+    /* Android System & Hardware Polish */
+    * {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      box-sizing: border-box;
+    }
+    input, textarea, select {
+      user-select: text;
+    }
+    html {
+      font-size: 15px;
+      transition: font-size 0.2s ease;
+    }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #F8F9FA;
+      color: #212529;
+      overscroll-behavior-y: none;
+    }
+    /* Safe Area insets for modern Android/iOS edge-to-edge screens */
+    .pb-safe {
+      padding-bottom: env(safe-area-inset-bottom, 16px);
+    }
+    .pt-safe {
+      padding-top: env(safe-area-inset-top, 16px);
+    }
+    .scrollbar-none::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-none {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .touch-target {
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    /* Anti-Cluttering & Responsive Rules for Large and Extra Large Font Scaling */
+    .font-scale-extra .dose-card-inner,
+    .font-scale-large .dose-card-inner {
+      flex-wrap: wrap;
+    }
+    .font-scale-extra .dose-card-actions,
+    .font-scale-large .dose-card-actions {
+      width: 100%;
+      justify-content: flex-end;
+      padding-top: 0.5rem;
+      margin-top: 0.35rem;
+      border-top: 1px dashed #E9ECEF;
+    }
+    .font-scale-extra .upcoming-dose-container,
+    .font-scale-large .upcoming-dose-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .font-scale-extra .upcoming-dose-btn,
+    .font-scale-large .upcoming-dose-btn {
+      width: 100%;
+      margin-top: 0.65rem;
+      text-align: center;
+    }
+    .font-scale-extra header,
+    .font-scale-large header {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+    .font-scale-extra #roleBadge,
+    .font-scale-large #roleBadge {
+      font-size: 9.5px;
+      padding: 2px 6px;
+    }
+  </style>
+</head>
+<body class="flex flex-col h-screen overflow-hidden text-charcoal bg-surface font-sans" id="appBody">
+
+  <!-- Sequential Splash & Loading Screen -->
+  <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white transition-opacity duration-400">
+    <div class="flex items-center justify-center w-20 h-20 rounded-2xl bg-teal-primary text-white shadow-sm mb-4">
+      <svg class="w-10 h-10" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M9 3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v5h5a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-5v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-5H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h5V3z"/>
+      </svg>
+    </div>
+    <div class="text-3xl font-bold tracking-tight text-charcoal">MEDIC</div>
+    <!-- Clean spinner showing after brand display -->
+    <div id="splashSpinnerContainer" class="mt-8 transition-opacity duration-300 opacity-0">
+      <div class="w-8 h-8 border-3 border-teal-primary border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  </div>
+
+  <!-- Fresh User First-Time Onboarding Wizard -->
+  <div id="onboardingScreen" class="fixed inset-0 z-40 bg-white hidden flex-col justify-between p-6 overflow-y-auto">
+    <div class="max-w-md mx-auto w-full pt-8 space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-teal-primary text-white flex items-center justify-center font-bold">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M9 3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v5h5a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-5v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-5H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h5V3z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold text-charcoal">Welcome to MEDIC</h1>
+          <p class="text-xs text-charcoal-muted">Setup your household to organize family health routines</p>
+        </div>
+      </div>
+
+      <div class="space-y-4 bg-surface p-4 rounded-2xl border border-surface-border">
+        <div>
+          <label class="block text-xs font-bold text-charcoal uppercase tracking-wider mb-1">Household / Family Name *</label>
+          <input type="text" id="obHouseholdName" placeholder="e.g. Sharma Family" class="w-full bg-white border border-surface-border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-primary font-medium">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-charcoal uppercase tracking-wider mb-1">Primary Caretaker Name *</label>
+          <input type="text" id="obCaretakerName" placeholder="e.g. Aditya Sharma" class="w-full bg-white border border-surface-border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-primary font-medium">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-charcoal uppercase tracking-wider mb-1">Caretaker Relationship</label>
+          <select id="obCaretakerRel" class="w-full bg-white border border-surface-border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-primary">
+            <option value="Self">Self</option>
+            <option value="Father">Father</option>
+            <option value="Mother">Mother</option>
+            <option value="Spouse">Spouse</option>
+            <option value="Son">Son</option>
+            <option value="Daughter">Daughter</option>
+          </select>
+        </div>
+
+        <div class="pt-2">
+          <label class="block text-xs font-bold text-charcoal uppercase tracking-wider mb-1.5">Initial Family Member to Care For</label>
+          <div class="grid grid-cols-2 gap-2">
+            <input type="text" id="obMemberName" placeholder="Member Name (e.g. Father)" class="bg-white border border-surface-border rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-teal-primary">
+            <select id="obMemberRel" class="bg-white border border-surface-border rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-teal-primary">
+              <option value="Father">Father</option>
+              <option value="Mother">Mother</option>
+              <option value="Grandfather">Grandfather</option>
+              <option value="Grandmother">Grandmother</option>
+              <option value="Spouse">Spouse</option>
+              <option value="Self">Self</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-md mx-auto w-full pb-safe pt-4">
+      <button id="obCompleteBtn" class="w-full py-3.5 bg-teal-primary text-white font-bold rounded-2xl text-sm shadow-sm touch-target">
+        Start Using MEDIC
+      </button>
+    </div>
+  </div>
+
+  <!-- Notification Banner / Toast Dialog -->
+  <div id="toast" class="fixed top-4 left-4 right-4 z-50 max-w-sm mx-auto p-4 rounded-xl shadow-lg border transform -translate-y-24 transition-transform duration-300 flex items-center gap-3 bg-white border-surface-border pointer-events-none opacity-0">
+    <div id="toastIcon" class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"></div>
+    <div id="toastMsg" class="text-sm font-medium flex-1"></div>
+  </div>
+
+  <!-- App Header -->
+  <header class="pt-safe px-3.5 py-2.5 bg-white border-b border-surface-border shrink-0 flex items-center justify-between z-10 gap-2">
+    <div class="flex items-center gap-1.5 min-w-0 shrink">
+      <div class="w-8 h-8 rounded-lg bg-teal-primary flex items-center justify-center text-white shrink-0">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M9 3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v5h5a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-5v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-5H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h5V3z"/>
+        </svg>
+      </div>
+      <span class="font-bold text-lg tracking-tight shrink-0" id="t-appName">MEDIC</span>
+      <div id="roleBadge" class="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-surface-subtle text-charcoal-muted uppercase tracking-wider truncate max-w-[100px]">
+        CARETAKER
+      </div>
+    </div>
+
+    <!-- Active Profile & Role Selector -->
+    <div class="flex items-center gap-1.5 shrink-0">
+      <button id="profileSelectorBtn" class="flex items-center gap-1.5 px-2 py-1 rounded-full bg-surface-subtle border border-surface-border hover:bg-surface text-xs font-semibold touch-target">
+        <div id="profileAvatar" class="w-5 h-5 rounded-full bg-teal-primary text-white text-[10px] flex items-center justify-center font-bold shrink-0">
+          A
+        </div>
+        <span id="profileName" class="max-w-[70px] sm:max-w-[110px] truncate">All</span>
+        <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-charcoal-muted shrink-0"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Viewports Container -->
+  <main id="appContainer" class="flex-1 overflow-y-auto scrollbar-none relative pb-20">
+    <!-- View 1: Home Screen -->
+    <section id="viewHome" class="p-4 space-y-4 max-w-xl mx-auto block">
+      <!-- Date Banner -->
+      <div class="flex items-center justify-between text-xs font-semibold text-charcoal-muted uppercase tracking-wider">
+        <span id="currentDateDisplay">Today</span>
+        <span id="scheduleProgress">0/0 Taken</span>
+      </div>
+
+      <!-- Action Alerts & Refill Banners -->
+      <div id="homeAlertsContainer" class="space-y-2"></div>
+
+      <!-- Next Scheduled Dose Spotlight Card (Highlights user name clearly) -->
+      <div id="nextDoseCard" class="bg-teal-primary text-white p-4 rounded-2xl shadow-sm relative overflow-hidden">
+        <div class="text-xs uppercase tracking-wider opacity-80 font-semibold mb-1" id="t-upcomingDose">Upcoming Dose</div>
+        <div id="nextDoseContent" class="space-y-2">
+          <div class="text-lg font-bold">No doses scheduled for today</div>
+          <div class="text-xs opacity-90">All prescribed medications are up to date.</div>
+        </div>
+      </div>
+
+      <!-- Today's Medicine Timeline -->
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <h2 class="text-xs font-bold text-charcoal tracking-wider uppercase" id="t-todayDoses">TODAY'S SCHEDULE</h2>
+          <button id="addDoseQuickBtn" class="text-xs font-semibold text-teal-primary flex items-center gap-1 touch-target">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i> <span id="t-addMedBtn">Add Medicine</span>
+          </button>
+        </div>
+        <div id="todayScheduleList" class="space-y-2.5">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- View 2: Family View -->
+    <section id="viewFamily" class="p-4 space-y-4 max-w-xl mx-auto hidden">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-lg font-bold" id="t-householdHeading">Household Profiles</h1>
+          <p class="text-xs text-charcoal-muted" id="t-householdSub">Manage family members & assigned caretakers</p>
+        </div>
+        <button id="addMemberBtn" class="px-3 py-2 bg-teal-primary text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 touch-target">
+          <i data-lucide="user-plus" class="w-4 h-4"></i> <span id="t-addMemberBtn">Add Member</span>
+        </button>
+      </div>
+
+      <!-- Household Members Grid -->
+      <div id="familyMembersList" class="space-y-2.5"></div>
+
+      <!-- Household Settings Block (Now Editable) -->
+      <div class="bg-white border border-surface-border rounded-2xl p-4 space-y-3">
+        <div class="text-xs font-bold text-charcoal-muted uppercase tracking-wider" id="t-householdDetails">Household Details</div>
+        <div class="flex items-center justify-between">
+          <div>
+            <div id="householdNameDisplay" class="font-bold text-sm text-charcoal">Sharma Family</div>
+            <div id="householdCreatedDisplay" class="text-xs text-charcoal-muted">Created Nov 2026</div>
+          </div>
+          <button id="editHouseholdBtn" class="p-2 rounded-lg text-teal-primary bg-teal-subtle hover:bg-teal-100 touch-target flex items-center gap-1 text-xs font-semibold">
+            <i data-lucide="edit-3" class="w-4 h-4"></i> Edit
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- View 3: Medicines View -->
+    <section id="viewMedicines" class="p-4 space-y-4 max-w-xl mx-auto hidden">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-lg font-bold" id="t-medsTitle">Medicines & Stock</h1>
+          <p class="text-xs text-charcoal-muted" id="t-medsSub">Prescriptions and remaining inventory</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="scanMedHeaderBtn" class="p-2.5 bg-surface-subtle text-teal-primary rounded-xl border border-surface-border flex items-center justify-center touch-target" title="Scan Medicine">
+            <i data-lucide="camera" class="w-4 h-4"></i>
+          </button>
+          <button id="addMedHeaderBtn" class="px-3 py-2 bg-teal-primary text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 touch-target">
+            <i data-lucide="plus" class="w-4 h-4"></i> <span id="t-addMedHeader">Add Medicine</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search & Category Filters -->
+      <div class="relative">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-charcoal-muted"></i>
+        <input type="text" id="medSearchInput" placeholder="Search by name, composition or condition..." class="w-full bg-white border border-surface-border rounded-xl pl-9 pr-4 py-2.5 text-sm focus:outline-none focus:border-teal-primary">
+      </div>
+
+      <!-- Member Filter Pills -->
+      <div id="medProfileFilterPills" class="flex items-center gap-2 overflow-x-auto scrollbar-none pb-1"></div>
+
+      <!-- Health Category Filter Pills -->
+      <div id="medCategoryFilterPills" class="flex items-center gap-1.5 overflow-x-auto scrollbar-none pb-1 text-xs"></div>
+
+      <!-- Medicine List -->
+      <div id="medicineInventoryList" class="space-y-3"></div>
+    </section>
+
+    <!-- View 4: Purchases View -->
+    <section id="viewPurchases" class="p-4 space-y-4 max-w-xl mx-auto hidden">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-lg font-bold" id="t-purchaseTitle">Medicine Expenses</h1>
+          <p class="text-xs text-charcoal-muted" id="t-purchaseSub">Track pharmacy purchases and price history</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="whatsappOrderBtn" class="px-2.5 py-1.5 bg-emerald-600 text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 touch-target shadow-xs hover:bg-emerald-700" title="Order Refills on WhatsApp">
+            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> <span>WhatsApp</span>
+          </button>
+          <button id="recordPurchaseBtn" class="px-3 py-2 bg-teal-primary text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 touch-target">
+            <i data-lucide="receipt" class="w-4 h-4"></i> <span id="t-newPurchaseBtn">New Purchase</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Expense Summary Cards -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-white border border-surface-border rounded-2xl p-3.5">
+          <div class="text-[11px] font-semibold text-charcoal-muted uppercase" id="t-thisMonth">This Month</div>
+          <div class="text-xl font-bold text-teal-primary mt-1" id="expThisMonth">₹0</div>
+          <div class="text-[11px] text-charcoal-muted mt-0.5" id="expTxCountMonth">0 purchases</div>
+        </div>
+        <div class="bg-white border border-surface-border rounded-2xl p-3.5">
+          <div class="text-[11px] font-semibold text-charcoal-muted uppercase" id="t-totalSpent">Total Spent</div>
+          <div class="text-xl font-bold text-charcoal mt-1" id="expAllTime">₹0</div>
+          <div class="text-[11px] text-charcoal-muted mt-0.5" id="expAvgMonth">₹0/mo avg</div>
+        </div>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="flex items-center justify-between text-xs text-charcoal-muted">
+        <span class="font-semibold uppercase tracking-wider" id="t-purchaseHistory">Purchase History</span>
+        <button id="scanBillBtn" class="text-teal-primary font-semibold flex items-center gap-1 touch-target">
+          <i data-lucide="scan" class="w-3.5 h-3.5"></i> Scan Bill Receipt
+        </button>
+      </div>
+
+      <!-- Purchase List -->
+      <div id="purchasesList" class="space-y-3"></div>
+    </section>
+
+    <!-- View 5: Settings View -->
+    <section id="viewSettings" class="p-4 space-y-4 max-w-xl mx-auto hidden">
+      <div>
+        <h1 class="text-lg font-bold" id="t-settingsTitle">Settings & Privacy</h1>
+        <p class="text-xs text-charcoal-muted" id="t-settingsSub">App preferences and data management</p>
+      </div>
+
+      <div class="bg-white border border-surface-border rounded-2xl divide-y divide-surface-border overflow-hidden">
+        <!-- Language Switcher -->
+        <div class="p-3.5 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <i data-lucide="languages" class="w-5 h-5 text-charcoal-muted"></i>
+            <div>
+              <div class="text-sm font-semibold" id="t-languageLabel">Language</div>
+              <div class="text-xs text-charcoal-muted">English, తెలుగు, हिन्दी</div>
+            </div>
+          </div>
+          <select id="settingLanguage" class="bg-surface-subtle text-xs font-semibold rounded-lg px-2.5 py-1.5 border border-surface-border focus:border-teal-primary outline-none">
+            <option value="en">English</option>
+            <option value="te">తెలుగు (Telugu)</option>
+            <option value="hi">हिन्दी (Hindi)</option>
+          </select>
+        </div>
+
+        <!-- Font Size Scale -->
+        <div class="p-3.5 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <i data-lucide="type" class="w-5 h-5 text-charcoal-muted"></i>
+            <div>
+              <div class="text-sm font-semibold" id="t-fontSizeLabel">Text Size</div>
+              <div class="text-xs text-charcoal-muted" id="t-fontSizeSub">Adjust for comfortable reading</div>
+            </div>
+          </div>
+          <select id="settingFontSize" class="bg-surface-subtle text-xs font-semibold rounded-lg px-2.5 py-1.5 border border-surface-border focus:border-teal-primary outline-none">
+            <option value="normal">Normal</option>
+            <option value="large">Large</option>
+            <option value="extra">Extra Large</option>
+          </select>
+        </div>
+
+        <!-- Role switch for single device test -->
+        <div class="p-3.5 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <i data-lucide="shield-check" class="w-5 h-5 text-charcoal-muted"></i>
+            <div>
+              <div class="text-sm font-semibold" id="t-roleLabel">Active Role</div>
+              <div class="text-xs text-charcoal-muted" id="t-roleSub">Simulate permissions for other devices</div>
+            </div>
+          </div>
+          <select id="settingRole" class="bg-surface-subtle text-xs font-semibold rounded-lg px-2.5 py-1.5 border border-surface-border">
+            <option value="CARETAKER">Caretaker (Full Access)</option>
+            <option value="ADULT">Adult (Self & Schedules)</option>
+            <option value="FAMILY_MEMBER">Family Member (View)</option>
+          </select>
+        </div>
+
+        <!-- Haptics -->
+        <div class="p-3.5 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <i data-lucide="smartphone" class="w-5 h-5 text-charcoal-muted"></i>
+            <div>
+              <div class="text-sm font-semibold" id="t-hapticsLabel">Vibration Feedback</div>
+              <div class="text-xs text-charcoal-muted" id="t-hapticsSub">Haptic confirmation on key actions</div>
+            </div>
+          </div>
+          <input type="checkbox" id="settingHaptics" checked class="w-4 h-4 accent-teal-primary cursor-pointer">
+        </div>
+
+        <!-- Notifications -->
+        <div class="p-3.5 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <i data-lucide="bell" class="w-5 h-5 text-charcoal-muted"></i>
+            <div>
+              <div class="text-sm font-semibold" id="t-notifLabel">Dose Reminders & Alarm</div>
+              <div class="text-xs text-charcoal-muted" id="notifStatusText">Audible chime & reminder alerts</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="testAlarmBtn" class="px-2.5 py-1 text-xs bg-teal-subtle text-teal-primary border border-teal-200 rounded-lg font-semibold touch-target flex items-center gap-1 hover:bg-teal-100">
+              <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> <span>Test Chime</span>
+            </button>
+            <button id="reqNotificationBtn" class="px-2.5 py-1 text-xs bg-surface-subtle border border-surface-border rounded-lg font-medium text-charcoal touch-target">
+              Enable
+            </button>
+          </div>
+        </div>
+
+        <!-- Voice Reading & Indian Accent Audio Setting -->
+        <div class="p-3.5 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <i data-lucide="mic" class="w-5 h-5 text-charcoal-muted"></i>
+            <div>
+              <div class="text-sm font-semibold" id="t-ttsLabel">Voice Reading & Accent</div>
+              <div class="text-xs text-charcoal-muted" id="ttsDetectedVoice">Natural Indian Accent (Chrome/Safari/Edge)</div>
+            </div>
+          </div>
+          <button id="testVoiceBtn" class="px-2.5 py-1 text-xs bg-teal-subtle text-teal-primary border border-teal-200 rounded-lg font-semibold touch-target flex items-center gap-1 hover:bg-teal-100">
+            <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> <span>Test Voice</span>
+          </button>
+        </div>
+
+        <!-- PWA Installation for All OS (Android, iOS, Windows, Mac, Linux) -->
+        <div class="p-3.5 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <i data-lucide="download-cloud" class="w-5 h-5 text-teal-primary"></i>
+            <div>
+              <div class="text-sm font-semibold" id="t-pwaInstallLabel">Install App on Device</div>
+              <div class="text-xs text-charcoal-muted" id="pwaInstallStatusText">Works 100% offline with dose alarms</div>
+            </div>
+          </div>
+          <button id="settingInstallPwaBtn" class="px-3 py-1.5 text-xs bg-teal-primary text-white rounded-lg font-semibold touch-target flex items-center gap-1.5 hover:bg-teal-dark shadow-xs">
+            <i data-lucide="smartphone" class="w-3.5 h-3.5"></i> <span id="settingInstallBtnText">Install</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Data Export, Backup & Restore -->
+      <div class="bg-white border border-surface-border rounded-2xl p-4 space-y-3">
+        <div class="text-xs font-bold text-charcoal-muted uppercase tracking-wider" id="t-backupTitle">Data & Backup</div>
+        <p class="text-xs text-charcoal-muted" id="t-backupSub">
+          All household data is stored securely in your browser's private offline database (IndexedDB). No personal health data is uploaded to any cloud.
+        </p>
+
+        <div class="flex gap-2">
+          <button id="exportDataBtn" class="flex-1 py-2.5 bg-surface-subtle border border-surface-border rounded-xl text-xs font-semibold flex items-center justify-center gap-2 hover:bg-surface touch-target">
+            <i data-lucide="download" class="w-4 h-4"></i> <span id="t-exportBtn">Export Backup</span>
+          </button>
+          <label class="flex-1 py-2.5 bg-surface-subtle border border-surface-border rounded-xl text-xs font-semibold flex items-center justify-center gap-2 hover:bg-surface cursor-pointer touch-target">
+            <i data-lucide="upload" class="w-4 h-4"></i> <span id="t-restoreBtn">Restore Backup</span>
+            <input type="file" id="importDataInput" accept=".json" class="hidden">
+          </label>
+        </div>
+
+        <button id="resetDataBtn" class="w-full py-2.5 text-xs font-semibold text-status-danger border border-red-200 rounded-xl hover:bg-red-50 touch-target">
+          Reset All Application Data
+        </button>
+      </div>
+
+      <div class="text-center text-[11px] text-charcoal-light py-2">
+        MEDIC • Completely Free & Non-Commercial Household Initiative
+      </div>
+    </section>
+  </main>
+
+  <!-- Floating PWA Install Banner (All OS: Android, iOS, Chrome, Edge, Safari) -->
+  <div id="pwaInstallBanner" class="hidden fixed bottom-20 left-3 right-3 sm:left-auto sm:right-6 sm:bottom-6 z-40 max-w-sm p-3.5 bg-white border border-teal-primary/30 rounded-2xl shadow-2xl flex items-center justify-between gap-3 transition-all duration-300">
+    <div class="flex items-center gap-2.5 min-w-0">
+      <div class="w-10 h-10 rounded-xl bg-teal-primary text-white flex items-center justify-center shrink-0 font-bold shadow-xs">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M9 3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v5h5a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-5v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-5H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h5V3z"/>
+        </svg>
+      </div>
+      <div class="min-w-0">
+        <div class="font-bold text-sm text-charcoal truncate">Install MEDIC App</div>
+        <div class="text-[11px] text-charcoal-muted truncate">Offline access & dose alarms</div>
+      </div>
+    </div>
+    <div class="flex items-center gap-1.5 shrink-0">
+      <button id="pwaDismissBtn" class="text-xs text-charcoal-muted px-2 py-1.5 rounded-lg hover:bg-surface-subtle font-medium touch-target">
+        Later
+      </button>
+      <button id="pwaInstallBtn" class="px-3 py-1.5 bg-teal-primary text-white text-xs font-bold rounded-xl shadow-xs touch-target hover:bg-teal-dark flex items-center gap-1">
+        <i data-lucide="download" class="w-3.5 h-3.5"></i> Install
+      </button>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation Bar (Android Styled) -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-surface-border pb-safe z-20">
+    <div class="max-w-xl mx-auto flex items-center justify-around h-16">
+      <button data-nav="viewHome" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 text-teal-primary touch-target">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span class="text-[11px] font-semibold mt-1" id="nav-t-home">Home</span>
+      </button>
+      <button data-nav="viewFamily" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 text-charcoal-muted touch-target">
+        <i data-lucide="users" class="w-5 h-5"></i>
+        <span class="text-[11px] font-semibold mt-1" id="nav-t-family">Family</span>
+      </button>
+      <button data-nav="viewMedicines" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 text-charcoal-muted touch-target">
+        <i data-lucide="pill" class="w-5 h-5"></i>
+        <span class="text-[11px] font-semibold mt-1" id="nav-t-meds">Medicines</span>
+      </button>
+      <button data-nav="viewPurchases" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 text-charcoal-muted touch-target">
+        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+        <span class="text-[11px] font-semibold mt-1" id="nav-t-purchases">Purchases</span>
+      </button>
+      <button data-nav="viewSettings" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 text-charcoal-muted touch-target">
+        <i data-lucide="settings" class="w-5 h-5"></i>
+        <span class="text-[11px] font-semibold mt-1" id="nav-t-settings">Settings</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ==================== MODALS & SHEETS ==================== -->
+
+  <!-- Modal: Household Name Editor -->
+  <div id="householdModal" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm hidden items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full max-w-md rounded-t-2xl sm:rounded-2xl p-5 space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="font-bold text-base">Edit Household Name</h3>
+        <button id="closeHouseholdModalBtn" class="p-1 rounded-full text-charcoal-muted hover:bg-surface-subtle touch-target">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <form id="householdForm" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-charcoal-muted mb-1">Household Title</label>
+          <input type="text" id="householdNameInput" required class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary font-medium">
+        </div>
+        <button type="submit" class="w-full py-3 bg-teal-primary text-white font-semibold rounded-xl text-sm shadow-sm touch-target">
+          Update Household Name
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Family Member Modal (With Custom "Other" Relation & Edit Support) -->
+  <div id="memberModal" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm hidden items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full max-w-md rounded-t-2xl sm:rounded-2xl p-5 space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between">
+        <h3 class="font-bold text-base" id="memberModalTitle">Add Family Member</h3>
+        <button id="closeMemberModalBtn" class="p-1 rounded-full text-charcoal-muted hover:bg-surface-subtle touch-target">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="memberForm" class="space-y-3.5">
+        <input type="hidden" id="memberIdField">
+        <div>
+          <label class="block text-xs font-semibold text-charcoal-muted mb-1">Full Name *</label>
+          <input type="text" id="memberNameField" required placeholder="e.g. Ramesh Sharma" class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-charcoal-muted mb-1">Relationship *</label>
+            <select id="memberRelField" class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary">
+              <option value="Self">Self</option>
+              <option value="Father">Father</option>
+              <option value="Mother">Mother</option>
+              <option value="Grandfather">Grandfather</option>
+              <option value="Grandmother">Grandmother</option>
+              <option value="Spouse">Spouse</option>
+              <option value="Brother">Brother</option>
+              <option value="Sister">Sister</option>
+              <option value="Son">Son</option>
+              <option value="Daughter">Daughter</option>
+              <option value="Other">Other...</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-charcoal-muted mb-1">Age</label>
+            <input type="number" id="memberAgeField" placeholder="e.g. 64" class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary">
+          </div>
+        </div>
+
+        <!-- Custom Relationship Name Field if "Other" is chosen -->
+        <div id="customRelContainer" class="hidden">
+          <label class="block text-xs font-semibold text-teal-dark mb-1">Specify Relationship Name *</label>
+          <input type="text" id="customRelField" placeholder="e.g. Uncle, Caretaker, Guardian" class="w-full bg-surface border border-teal-primary rounded-xl px-3 py-2 text-sm focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-charcoal-muted mb-1">Primary Health Conditions</label>
+          <input type="text" id="memberConditionsField" placeholder="e.g. Type 2 Diabetes, Hypertension" class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary">
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-teal-primary text-white font-semibold rounded-xl text-sm shadow-sm touch-target">
+          Save Member
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Scanner & OCR Engine -->
+  <div id="ocrModal" class="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm hidden flex flex-col justify-end sm:justify-center items-center p-0 sm:p-4">
+    <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-2xl p-5 space-y-4 max-h-[92vh] overflow-y-auto flex flex-col">
+      <div class="flex items-center justify-between shrink-0">
+        <div>
+          <h3 class="font-bold text-base">Scan Medicine Packaging</h3>
+          <p class="text-xs text-charcoal-muted">Indian strip, box or pharmacy bill OCR</p>
+        </div>
+        <button id="closeOcrModalBtn" class="p-1 rounded-full text-charcoal-muted hover:bg-surface-subtle touch-target">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Camera Preview & Canvas -->
+      <div class="relative bg-black rounded-2xl overflow-hidden aspect-[4/3] flex items-center justify-center">
+        <video id="cameraVideo" autoplay playsinline class="w-full h-full object-cover hidden"></video>
+        <canvas id="cropCanvas" class="hidden"></canvas>
+        <img id="imagePreview" class="max-h-full max-w-full object-contain hidden" alt="Captured preview">
+
+        <div id="cameraPlaceholder" class="text-white text-center p-4">
+          <i data-lucide="camera" class="w-10 h-10 mx-auto mb-2 opacity-60"></i>
+          <p class="text-xs text-gray-300">Camera preview will appear here</p>
+        </div>
+
+        <!-- Scanning overlay animation -->
+        <div id="scanLine" class="absolute left-0 right-0 h-0.5 bg-teal-primary shadow-[0_0_8px_#0F766E] hidden animate-pulse"></div>
+      </div>
+
+      <!-- Camera and OCR Control Buttons -->
+      <div class="flex items-center gap-2">
+        <button id="startCamBtn" class="flex-1 py-2.5 bg-surface-subtle border border-surface-border rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 touch-target">
+          <i data-lucide="video" class="w-4 h-4"></i> Start Camera
+        </button>
+        <button id="capturePicBtn" class="flex-1 py-2.5 bg-teal-primary text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 hidden touch-target">
+          <i data-lucide="aperture" class="w-4 h-4"></i> Take Photo
+        </button>
+        <label class="flex-1 py-2.5 bg-surface-subtle border border-surface-border rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 cursor-pointer touch-target">
+          <i data-lucide="image" class="w-4 h-4"></i> Upload Photo
+          <input type="file" id="fileImageInput" accept="image/*" class="hidden">
+        </label>
+      </div>
+
+      <!-- Preprocessing & Filters -->
+      <div id="ocrProcessBar" class="hidden space-y-2">
+        <div class="flex items-center justify-between text-xs text-charcoal-muted">
+          <span id="ocrStatusText">Recognising printed text...</span>
+          <span id="ocrProgressVal">0%</span>
+        </div>
+        <div class="w-full bg-surface-subtle h-2 rounded-full overflow-hidden">
+          <div id="ocrProgressBar" class="h-full bg-teal-primary transition-all duration-200" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- OCR Recognized Fields Review -->
+      <div id="ocrReviewSection" class="hidden space-y-3 bg-surface p-3.5 rounded-xl border border-surface-border">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold uppercase tracking-wider text-charcoal-muted">Recognised Package Information</span>
+          <span id="ocrConfidenceBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-status-success">
+            Confidence: High
+          </span>
+        </div>
+
+        <div class="space-y-2 text-xs">
+          <div>
+            <span class="font-medium text-charcoal-muted">Extracted Name:</span>
+            <input type="text" id="ocrExtractedName" class="w-full mt-1 bg-white border border-surface-border rounded-lg px-2 py-1.5 font-semibold text-charcoal">
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <span class="font-medium text-charcoal-muted">Strength:</span>
+              <input type="text" id="ocrExtractedStrength" class="w-full mt-1 bg-white border border-surface-border rounded-lg px-2 py-1.5">
+            </div>
+            <div>
+              <span class="font-medium text-charcoal-muted">Dosage Form:</span>
+              <input type="text" id="ocrExtractedForm" class="w-full mt-1 bg-white border border-surface-border rounded-lg px-2 py-1.5">
+            </div>
+          </div>
+          <div>
+            <span class="font-medium text-charcoal-muted">Active Composition:</span>
+            <input type="text" id="ocrExtractedComp" class="w-full mt-1 bg-white border border-surface-border rounded-lg px-2 py-1.5">
+          </div>
+          <div>
+            <span class="font-medium text-charcoal-muted">Manufacturer:</span>
+            <input type="text" id="ocrExtractedMfr" class="w-full mt-1 bg-white border border-surface-border rounded-lg px-2 py-1.5">
+          </div>
+        </div>
+
+        <button id="applyOcrToMedBtn" class="w-full py-2.5 bg-teal-primary text-white font-semibold rounded-xl text-xs touch-target">
+          Use This Information in Medicine Form
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add / Edit Medicine & Schedule (Upgraded with Custom Category, Custom Times & Hour Intervals) -->
+  <div id="medicineModal" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm hidden items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-2xl p-5 space-y-4 max-h-[92vh] overflow-y-auto">
+      <div class="flex items-center justify-between">
+        <h3 class="font-bold text-base" id="medicineModalTitle">Prescribed Medicine</h3>
+        <button id="closeMedModalBtn" class="p-1 rounded-full text-charcoal-muted hover:bg-surface-subtle touch-target">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="medicineForm" class="space-y-4">
+        <input type="hidden" id="medFormId">
+
+        <!-- Family Member Assignment -->
+        <div>
+          <label class="block text-xs font-semibold text-charcoal-muted mb-1">Prescribed For *</label>
+          <select id="medFormMemberId" required class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary font-medium">
+            <!-- Dynamic members -->
+          </select>
+        </div>
+
+        <!-- Health Condition / Category Selector for Indian Medicine Database -->
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between text-xs">
+            <label class="font-semibold text-charcoal-muted flex items-center gap-1.5">
+              <i data-lucide="layers" class="w-3.5 h-3.5 text-teal-primary"></i>
+              <span>Filter by Health Category</span>
+            </label>
+            <span id="medCategoryBadge" class="text-[10px] font-bold text-teal-primary bg-teal-subtle px-1.5 py-0.5 rounded">
+              All 112+ Indian Medicines
+            </span>
+          </div>
+          <div id="medModalCategoryChips" class="flex items-center gap-1.5 overflow-x-auto scrollbar-none pb-1 text-xs"></div>
+        </div>
+
+        <!-- Medicine Name & Google-like Intellisense Autocomplete -->
+        <div class="space-y-1 relative">
+          <div class="flex items-center justify-between">
+            <label class="text-xs font-semibold text-charcoal-muted flex items-center gap-1.5">
+              <span>Brand / Medicine Name *</span>
+              <span class="text-[10px] text-teal-primary font-bold px-1.5 py-0.5 bg-teal-subtle rounded flex items-center gap-1">
+                <i data-lucide="shield-check" class="w-3 h-3"></i> NLEM / CDSCO Intellisense
+              </span>
+            </label>
+            <button type="button" id="openScannerFromFormBtn" class="text-xs text-teal-primary font-semibold flex items-center gap-1">
+              <i data-lucide="camera" class="w-3.5 h-3.5"></i> Scan Strip
+            </button>
+          </div>
+          <div class="relative">
+            <input type="text" id="medFormBrand" required autocomplete="off" placeholder="Type medicine name (e.g. Telma, Dolo, Pan, Glycomet, Augmentin)..." class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-primary font-medium">
+            <!-- Google-Style Intellisense Autocomplete Dropdown -->
+            <div id="medBrandSuggestions" class="hidden absolute top-full left-0 right-0 z-50 bg-white border border-surface-border rounded-2xl shadow-2xl mt-1.5 max-h-72 overflow-y-auto divide-y divide-surface-border/60"></div>
+          </div>
+          <div id="medAutofillBadge" class="hidden text-[11px] text-status-success font-semibold items-center gap-1.5 pt-0.5">
+            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+            <span>Verified Indian Standard Medicine Auto-Filled</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-charcoal-muted mb-1">Generic / Composition</label>
+            <input type="text" id="medFormGeneric" placeholder="e.g. Telmisartan" class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-charcoal-muted mb-1">Strength</label>
+            <input type="text" id="medFormStrength" placeholder="e.g. 40 mg, 500 mg" class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-charcoal-muted mb-1">Dosage Form</label>
+            <select id="medFormDosageForm" class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary">
+              <option value="Tablet">Tablet</option>
+              <option value="Capsule">Capsule</option>
+              <option value="Syrup">Syrup</option>
+              <option value="Oral Solution">Oral Solution</option>
+              <option value="Drops">Drops</option>
+              <option value="Inhaler">Inhaler</option>
+              <option value="Cream">Cream</option>
+              <option value="Ointment">Ointment</option>
+              <option value="Powder">Powder</option>
+              <option value="Injection">Injection</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-charcoal-muted mb-1">Health Category</label>
+            <select id="medFormCategory" class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary">
+              <option value="Blood Pressure / Hypertension">Blood Pressure</option>
+              <option value="Type 2 Diabetes">Type 2 Diabetes</option>
+              <option value="Type 1 Diabetes">Type 1 Diabetes</option>
+              <option value="Cholesterol">Cholesterol</option>
+              <option value="Thyroid">Thyroid</option>
+              <option value="Heart and Cardiovascular Care">Heart Care</option>
+              <option value="Gastric and Acid Reflux">Gastric / Acidity</option>
+              <option value="Asthma">Asthma</option>
+              <option value="Respiratory Care">Respiratory Care</option>
+              <option value="Fever and Pain">Fever & Pain</option>
+              <option value="Bone and Joint Care">Bone & Joint Care</option>
+              <option value="Vitamin Deficiency">Vitamin Supplement</option>
+              <option value="General Supplements">General Supplement</option>
+              <option value="CUSTOM_CATEGORY">Custom Category...</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Custom Category Name Field -->
+        <div id="customCategoryContainer" class="hidden">
+          <label class="block text-xs font-semibold text-teal-dark mb-1">Custom Category Name *</label>
+          <input type="text" id="customCategoryField" placeholder="e.g. Neurological Care, Eye Drops" class="w-full bg-surface border border-teal-primary rounded-xl px-3 py-2 text-sm focus:outline-none">
+        </div>
+
+        <!-- Prescribed Schedule & Timing Section -->
+        <div class="pt-2 border-t border-surface-border space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-charcoal-muted uppercase tracking-wider">Prescribed Routine</span>
+            <span class="text-[11px] text-teal-primary font-semibold">Custom Timings</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-charcoal-muted mb-1">Dose Units (e.g. 1 tab)</label>
+              <input type="number" step="0.5" id="medFormUnitsPerDose" value="1" required class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-charcoal-muted mb-1">Food Timing</label>
+              <select id="medFormFoodTiming" class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary">
+                <option value="After Food">After Food</option>
+                <option value="Before Food (Empty Stomach)">Before Food (Empty Stomach)</option>
+                <option value="With Food">With Food</option>
+                <option value="Anytime">Anytime / Not Specified</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Schedule Mode: Fixed Slots or Recurring Hourly Interval -->
+          <div>
+            <label class="block text-xs font-semibold text-charcoal-muted mb-1.5">Schedule Pattern</label>
+            <select id="medSchedulePattern" class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary font-medium">
+              <option value="SLOTS">Daily Routine Slots (Morning, Afternoon, etc.)</option>
+              <option value="HOURLY_4">Every 4 Hours</option>
+              <option value="HOURLY_6">Every 6 Hours</option>
+              <option value="HOURLY_8">Every 8 Hours</option>
+              <option value="HOURLY_12">Every 12 Hours</option>
+              <option value="AS_NEEDED">SOS / As Needed Only</option>
+            </select>
+          </div>
+
+          <!-- Customizable Daily Slots Section with Time Pickers -->
+          <div id="slotsScheduleContainer" class="space-y-2">
+            <label class="block text-xs font-semibold text-charcoal-muted">Configured Times of Day</label>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <!-- Morning -->
+              <div class="p-2.5 rounded-xl border border-surface-border bg-surface flex items-center justify-between">
+                <label class="flex items-center gap-2 cursor-pointer font-semibold">
+                  <input type="checkbox" id="checkMorning" class="accent-teal-primary w-4 h-4" checked> Morning
+                </label>
+                <input type="time" id="timeMorningVal" value="08:00" class="bg-white border border-surface-border rounded-lg px-2 py-1 text-xs">
+              </div>
+
+              <!-- Afternoon -->
+              <div class="p-2.5 rounded-xl border border-surface-border bg-surface flex items-center justify-between">
+                <label class="flex items-center gap-2 cursor-pointer font-semibold">
+                  <input type="checkbox" id="checkAfternoon" class="accent-teal-primary w-4 h-4"> Noon
+                </label>
+                <input type="time" id="timeAfternoonVal" value="13:00" class="bg-white border border-surface-border rounded-lg px-2 py-1 text-xs">
+              </div>
+
+              <!-- Evening -->
+              <div class="p-2.5 rounded-xl border border-surface-border bg-surface flex items-center justify-between">
+                <label class="flex items-center gap-2 cursor-pointer font-semibold">
+                  <input type="checkbox" id="checkEvening" class="accent-teal-primary w-4 h-4"> Evening
+                </label>
+                <input type="time" id="timeEveningVal" value="18:00" class="bg-white border border-surface-border rounded-lg px-2 py-1 text-xs">
+              </div>
+
+              <!-- Night -->
+              <div class="p-2.5 rounded-xl border border-surface-border bg-surface flex items-center justify-between">
+                <label class="flex items-center gap-2 cursor-pointer font-semibold">
+                  <input type="checkbox" id="checkNight" class="accent-teal-primary w-4 h-4" checked> Night
+                </label>
+                <input type="time" id="timeNightVal" value="21:00" class="bg-white border border-surface-border rounded-lg px-2 py-1 text-xs">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stock and Inventory Initial Setup -->
+        <div class="pt-2 border-t border-surface-border space-y-3">
+          <div class="text-xs font-bold text-charcoal-muted uppercase tracking-wider">Stock & Inventory</div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-charcoal-muted mb-1">Current Stock in Hand</label>
+              <input type="number" id="medFormStock" value="20" required class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-charcoal-muted mb-1">Refill Threshold (Days)</label>
+              <input type="number" id="medFormRefillDays" value="5" class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary">
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-teal-primary text-white font-semibold rounded-xl text-sm shadow-sm touch-target">
+          Save Prescribed Medicine
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Record / Edit Purchase -->
+  <div id="purchaseModal" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm hidden items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-2xl p-5 space-y-4 max-h-[92vh] overflow-y-auto">
+      <div class="flex items-center justify-between">
+        <h3 class="font-bold text-base" id="purchaseModalTitle">Record Medicine Purchase</h3>
+        <button id="closePurchaseModalBtn" class="p-1 rounded-full text-charcoal-muted hover:bg-surface-subtle touch-target">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="purchaseForm" class="space-y-3.5">
+        <input type="hidden" id="purchaseEditId">
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-charcoal-muted mb-1">Purchase Date *</label>
+            <input type="date" id="purchaseDateField" required class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-charcoal-muted mb-1">Pharmacy / Chemist Name</label>
+            <input type="text" id="purchasePharmacyField" placeholder="e.g. Apollo Pharmacy" class="w-full bg-surface border border-surface-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-teal-primary">
+          </div>
+        </div>
+
+        <!-- Purchased Medicines Item List -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-charcoal-muted">Items Purchased</span>
+            <button type="button" id="addPurchaseItemRowBtn" class="text-xs text-teal-primary font-semibold flex items-center gap-1">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add Another Medicine
+            </button>
+          </div>
+
+          <div id="purchaseItemsContainer" class="space-y-3">
+            <!-- Dynamic Purchase Items -->
+          </div>
+        </div>
+
+        <!-- Bill Total & Payment Method -->
+        <div class="bg-surface p-3 rounded-xl border border-surface-border space-y-2">
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-charcoal-muted font-medium">Total Bill Amount:</span>
+            <span class="text-base font-bold text-teal-primary" id="purchaseTotalDisplay">₹0</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-2 border-t border-surface-border">
+            <div>
+              <label class="block text-[11px] font-semibold text-charcoal-muted mb-1">Payment Mode</label>
+              <select id="purchasePayMode" class="w-full bg-white border border-surface-border rounded-lg px-2 py-1.5 text-xs">
+                <option value="UPI">UPI / GPay / PhonePe</option>
+                <option value="Cash">Cash</option>
+                <option value="Card">Debit / Credit Card</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-charcoal-muted mb-1">Bill Reference / Notes</label>
+              <input type="text" id="purchaseNotes" placeholder="Optional notes" class="w-full bg-white border border-surface-border rounded-lg px-2 py-1.5 text-xs">
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-teal-primary text-white font-semibold rounded-xl text-sm shadow-sm touch-target">
+          Save Purchase & Update Stock
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Profile Switcher Action Sheet -->
+  <div id="profileSheet" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm hidden items-end justify-center p-0">
+    <div class="bg-white w-full max-w-md rounded-t-3xl p-5 space-y-3 pb-safe">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="font-bold text-sm text-charcoal-muted uppercase tracking-wider">Select Member View</h3>
+        <button id="closeProfileSheetBtn" class="p-1 text-charcoal-muted touch-target">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div id="profileSheetOptions" class="space-y-2"></div>
+    </div>
+  </div>
+
+  <!-- Modal: Price History & Stock Details -->
+  <div id="medicineDetailModal" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm hidden items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-2xl p-5 space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-base" id="detailMedName">Medicine Details</h3>
+          <div class="text-xs text-charcoal-muted" id="detailMedSub"></div>
+        </div>
+        <button id="closeMedDetailBtn" class="p-1 rounded-full text-charcoal-muted hover:bg-surface-subtle touch-target">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Current Stock Details -->
+      <div class="bg-surface rounded-2xl p-4 border border-surface-border grid grid-cols-3 gap-2 text-center">
+        <div>
+          <div class="text-xs text-charcoal-muted">Current Stock</div>
+          <div class="text-lg font-bold text-charcoal mt-1" id="detailCurrentStock">0</div>
+        </div>
+        <div>
+          <div class="text-xs text-charcoal-muted">Daily Usage</div>
+          <div class="text-lg font-bold text-charcoal mt-1" id="detailDailyUsage">0</div>
+        </div>
+        <div>
+          <div class="text-xs text-charcoal-muted">Days Left</div>
+          <div class="text-lg font-bold text-teal-primary mt-1" id="detailDaysLeft">0 d</div>
+        </div>
+      </div>
+
+      <!-- Price History -->
+      <div>
+        <h4 class="text-xs font-bold text-charcoal-muted uppercase tracking-wider mb-2">Purchase Price History</h4>
+        <div id="detailPriceHistory" class="space-y-2 text-xs"></div>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex gap-2 pt-2 border-t border-surface-border">
+        <button id="detailEditMedBtn" class="flex-1 py-2.5 bg-teal-subtle text-teal-primary rounded-xl text-xs font-semibold touch-target">
+          Edit Routine
+        </button>
+        <button id="detailAdjustStockBtn" class="flex-1 py-2.5 bg-surface-subtle border border-surface-border rounded-xl text-xs font-semibold touch-target">
+          Adjust Stock
+        </button>
+        <button id="detailDeleteMedBtn" class="px-4 py-2.5 bg-red-50 text-status-danger rounded-xl text-xs font-semibold touch-target">
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Custom Confirm / Alert Modal (Strict Rule: No browser alert/confirm) -->
+  <div id="confirmModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs hidden items-center justify-center p-4">
+    <div class="bg-white w-full max-w-sm rounded-2xl p-5 space-y-4 shadow-xl">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 text-status-warning flex items-center justify-center shrink-0">
+          <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm text-charcoal" id="confirmModalTitle">Are you sure?</h4>
+          <p class="text-xs text-charcoal-muted mt-0.5" id="confirmModalMessage">This action cannot be undone.</p>
+        </div>
+      </div>
+      <div class="flex gap-2 pt-2">
+        <button id="confirmCancelBtn" class="flex-1 py-2.5 bg-surface-subtle text-charcoal font-semibold rounded-xl text-xs touch-target">
+          Cancel
+        </button>
+        <button id="confirmProceedBtn" class="flex-1 py-2.5 bg-status-danger text-white font-semibold rounded-xl text-xs touch-target">
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Wipe All Data with Size & Export Option (Safety Prompt) -->
+  <div id="wipeDataModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs hidden items-center justify-center p-4">
+    <div class="bg-white w-full max-w-sm rounded-2xl p-5 space-y-4 shadow-xl border border-red-100">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-red-100 text-status-danger flex items-center justify-center shrink-0">
+          <i data-lucide="trash-2" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-base text-charcoal">Wipe All Application Data?</h4>
+          <p class="text-xs text-charcoal-muted mt-0.5">Shall I proceed with wiping your offline health records?</p>
+        </div>
+      </div>
+
+      <!-- Storage Size & Breakdown Container -->
+      <div class="bg-surface p-3 rounded-xl border border-surface-border text-xs space-y-2">
+        <div class="flex justify-between items-center font-bold text-charcoal">
+          <span>Data to be Cleared:</span>
+          <span id="wipeDataSizeBadge" class="px-2 py-0.5 bg-red-50 text-status-danger rounded font-semibold text-[11px]">Calculating...</span>
+        </div>
+        <div id="wipeDataBreakdown" class="text-charcoal-muted space-y-1 text-[11px]">
+          <!-- Dynamic breakdown injected here -->
+        </div>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 space-y-2">
+        <div class="font-bold flex items-center gap-1.5">
+          <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-700"></i>
+          <span>Recommended Safety Step</span>
+        </div>
+        <p class="text-[11px] text-amber-800">
+          Export a complete offline backup file before deleting so you can restore your data later if needed.
+        </p>
+        <button id="wipeExportFirstBtn" class="w-full py-2 bg-white border border-amber-300 text-amber-900 rounded-lg font-semibold text-xs flex items-center justify-center gap-1.5 hover:bg-amber-100/50 touch-target shadow-xs">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i> <span id="wipeExportBtnText">Export Backup Before Wiping</span>
+        </button>
+      </div>
+
+      <div class="flex gap-2 pt-1">
+        <button id="wipeCancelBtn" class="flex-1 py-2.5 bg-surface-subtle text-charcoal font-semibold rounded-xl text-xs touch-target">
+          Cancel
+        </button>
+        <button id="wipeConfirmBtn" class="flex-1 py-2.5 bg-status-danger text-white font-semibold rounded-xl text-xs touch-target shadow-xs">
+          Yes, Wipe All Data
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: PWA Installation Guide (iOS Safari, Android, Chrome, Edge, Desktop) -->
+  <div id="pwaGuideModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs hidden items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-2xl p-5 space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-teal-primary text-white flex items-center justify-center font-bold text-xs">
+            <i data-lucide="download" class="w-4 h-4"></i>
+          </div>
+          <h3 class="font-bold text-base text-charcoal" id="pwaGuideTitle">Install MEDIC App</h3>
+        </div>
+        <button id="closePwaGuideBtn" class="p-1 rounded-full text-charcoal-muted hover:bg-surface-subtle touch-target">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div id="pwaGuideContent" class="space-y-3 text-xs text-charcoal">
+        <!-- Dynamic guide instructions injected here -->
+      </div>
+      <button id="dismissPwaGuideBtn" class="w-full py-2.5 bg-teal-primary text-white font-semibold rounded-xl text-xs touch-target shadow-xs">
+        Got It
+      </button>
+    </div>
+  </div>
+
+  <!-- APPLICATION ARCHITECTURE JAVASCRIPT -->
+  <script src="src/app.js"></script>
+</body>
+</html>
