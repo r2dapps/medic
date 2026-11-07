@@ -16,7 +16,7 @@
     <!-- Pulse Animation -->
     <style>
       .pulse-cross {
-        transform-origin: center;
+        transform-origin: 55px 55px;
         animation: pulse 3s ease-in-out infinite;
       }
       .wave-line {
@@ -32,7 +32,7 @@
       }
       @keyframes pulse {
         0%, 100% { transform: scale(1); opacity: 0.95; }
-        50% { transform: scale(1.08); opacity: 1; filter: drop-shadow(0 0 14px #2DD4BF); }
+        50% { transform: scale(1.06); opacity: 1; filter: drop-shadow(0 0 12px #2DD4BF); }
       }
       @keyframes drawLine {
         0% { stroke-dashoffset: 800; }
@@ -41,7 +41,7 @@
       }
       @keyframes floatBadge {
         0% { transform: translateY(0px); }
-        100% { transform: translateY(-6px); }
+        100% { transform: translateY(-5px); }
       }
       @keyframes shimmer {
         0%, 100% { opacity: 0.85; }
@@ -78,10 +78,12 @@
         fill="none" stroke="#2DD4BF" stroke-width="2.5" opacity="0.4" />
 
   <!-- Animated Glowing Logo Icon -->
-  <g transform="translate(100, 100)" class="pulse-cross">
-    <rect width="110" height="110" rx="28" fill="#134E4A" stroke="#2DD4BF" stroke-width="2.5" />
-    <!-- White Medical Cross -->
-    <path d="M 45 25 L 65 25 L 65 45 L 85 45 L 85 65 L 65 65 L 65 85 L 45 85 L 45 65 L 25 65 L 25 45 L 45 45 Z" fill="#FFFFFF" />
+  <g transform="translate(100, 100)">
+    <g class="pulse-cross">
+      <rect width="110" height="110" rx="28" fill="#134E4A" stroke="#2DD4BF" stroke-width="2.5" />
+      <!-- White Medical Cross -->
+      <path d="M 45 25 L 65 25 L 65 45 L 85 45 L 85 65 L 65 65 L 65 85 L 45 85 L 45 65 L 25 65 L 25 45 L 45 45 Z" fill="#FFFFFF" />
+    </g>
   </g>
 
   <!-- Brand Typography -->
@@ -101,35 +103,37 @@
   </g>
 
   <!-- Feature Capsule Badges -->
-  <g transform="translate(100, 310)" class="badge-glow">
-    <!-- Badge 1: 100% Offline -->
-    <g transform="translate(0, 0)">
-      <rect width="170" height="42" rx="12" fill="#134E4A" stroke="#14B8A6" stroke-width="1.5" />
-      <text x="85" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">100% Offline PWA</text>
-    </g>
+  <g transform="translate(100, 320)">
+    <g class="badge-glow">
+      <!-- Badge 1: 100% Offline -->
+      <g transform="translate(0, 0)">
+        <rect width="170" height="42" rx="12" fill="#134E4A" stroke="#14B8A6" stroke-width="1.5" />
+        <text x="85" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">100% Offline PWA</text>
+      </g>
 
-    <!-- Badge 2: NLEM Standards -->
-    <g transform="translate(185, 0)">
-      <rect width="185" height="42" rx="12" fill="#134E4A" stroke="#14B8A6" stroke-width="1.5" />
-      <text x="92" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">112+ NLEM Medicines</text>
-    </g>
+      <!-- Badge 2: NLEM Standards -->
+      <g transform="translate(185, 0)">
+        <rect width="185" height="42" rx="12" fill="#134E4A" stroke="#14B8A6" stroke-width="1.5" />
+        <text x="92" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">112+ NLEM Medicines</text>
+      </g>
 
-    <!-- Badge 3: Voice Reading -->
-    <g transform="translate(385, 0)">
-      <rect width="190" height="42" rx="12" fill="#134E4A" stroke="#14B8A6" stroke-width="1.5" />
-      <text x="95" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">Aarti Natural Voice</text>
-    </g>
+      <!-- Badge 3: Voice Reading -->
+      <g transform="translate(385, 0)">
+        <rect width="190" height="42" rx="12" fill="#134E4A" stroke="#14B8A6" stroke-width="1.5" />
+        <text x="95" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">Aarti Natural Voice</text>
+      </g>
 
-    <!-- Badge 4: Multilingual -->
-    <g transform="translate(590, 0)">
-      <rect width="195" height="42" rx="12" fill="#134E4A" stroke="#14B8A6" stroke-width="1.5" />
-      <text x="97" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">EN • తెలుగు • हिन्दी</text>
-    </g>
+      <!-- Badge 4: Multilingual -->
+      <g transform="translate(590, 0)">
+        <rect width="195" height="42" rx="12" fill="#134E4A" stroke="#14B8A6" stroke-width="1.5" />
+        <text x="97" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">EN • Telugu • Hindi</text>
+      </g>
 
-    <!-- Badge 5: WhatsApp Refill -->
-    <g transform="translate(800, 0)">
-      <rect width="195" height="42" rx="12" fill="#134E4A" stroke="#14B8A6" stroke-width="1.5" />
-      <text x="97" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">WhatsApp Refill</text>
+      <!-- Badge 5: WhatsApp Refill -->
+      <g transform="translate(800, 0)">
+        <rect width="195" height="42" rx="12" fill="#134E4A" stroke="#14B8A6" stroke-width="1.5" />
+        <text x="97" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">WhatsApp Refill</text>
+      </g>
     </g>
   </g>
 </svg>

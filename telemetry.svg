@@ -105,8 +105,8 @@
   <!-- Top Status Bar -->
   <g transform="translate(32, 28)">
     <circle cx="6" cy="6" r="5" fill="#10b981" class="blinking-dot" />
-    <text x="22" y="10" fill="#99f6e4" class="text-title">VITAL TELEMETRY &bull; LOCAL SYSTEM VERIFIED &bull; ZERO CLOUD EMISSION</text>
-    <text x="1136" y="10" text-anchor="end" fill="#5eead4" class="text-title">PWA COMPLIANT &bull; CDSCO ALIGNED</text>
+    <text x="22" y="10" fill="#99f6e4" class="text-title">VITAL TELEMETRY • LOCAL SYSTEM VERIFIED • ZERO CLOUD EMISSION</text>
+    <text x="1136" y="10" text-anchor="end" fill="#5eead4" class="text-title">PWA COMPLIANT • CDSCO ALIGNED</text>
   </g>
 
   <!-- Dual Static Ghost ECG Wave -->
@@ -138,3 +138,4 @@
     <text x="869" y="36" fill="#f0fdfa" class="text-val">Client Tesseract.js</text>
   </g>
 </svg>
+

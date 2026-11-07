@@ -14,8 +14,8 @@
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Launch%20MEDIC-0F766E?style=for-the-badge&logo=googlechrome&logoColor=white)](https://r2dapps.github.io/medic/)
 [![PWA Ready](https://img.shields.io/badge/PWA-Offline%20Capable-14B8A6?style=for-the-badge&logo=pwa&logoColor=white)](https://r2dapps.github.io/medic/)
 [![Medical Standards](https://img.shields.io/badge/Standard-NLEM%202022%20%7C%20CDSCO-teal?style=for-the-badge)](https://cdsco.gov.in/)
-[![Voice TTS](https://img.shields.io/badge/Speech%20Engine-Indian%20Natural%20Accent-0D9488?style=for-the-badge)](#natural-accent-voice-assistance)
-[![Zero Cloud Privacy](https://img.shields.io/badge/Privacy-100%25%20Client--Side%20IndexedDB-10B981?style=for-the-badge)](#zero-cloud-offline-architecture)
+[![Voice TTS](https://img.shields.io/badge/Speech%20Engine-Indian%20Natural%20Accent-0D9488?style=for-the-badge)](#natural-accent-speech-synthesis)
+[![Zero Cloud Privacy](https://img.shields.io/badge/Privacy-100%25%20Client--Side%20IndexedDB-10B981?style=for-the-badge)](#zero-cloud-offline-engine)
 [![Published By](https://img.shields.io/badge/Published%20By-R2D%20Apps-115E59?style=for-the-badge)](https://r2dapps.github.io)
 
 <p align="center">
@@ -37,11 +37,11 @@
 
 ## Clinical System Overview
 
-<table>
+<table width="100%">
   <thead>
     <tr>
-      <th align="left">System Metric</th>
-      <th align="left">Clinical Specification</th>
+      <th width="30%" align="left">System Dimension</th>
+      <th width="70%" align="left">Clinical &amp; Architectural Specification</th>
     </tr>
   </thead>
   <tbody>
@@ -70,15 +70,15 @@
       <td>Modern Web Browsers (Chrome, Edge, Safari, Firefox), Android PWA, iOS PWA</td>
     </tr>
     <tr>
-      <td><strong>Data Engine</strong></td>
-      <td>100% Client-Side W3C IndexedDB (16 Object Stores, Zero Remote Transmission)</td>
+      <td><strong>Storage Engine</strong></td>
+      <td>100% Client-Side W3C IndexedDB (16 Atomic Object Stores, Zero Remote Calls)</td>
     </tr>
     <tr>
-      <td><strong>Clinical Standards</strong></td>
+      <td><strong>Formulary Standards</strong></td>
       <td>National List of Essential Medicines (NLEM 2022) &amp; CDSCO Formulations</td>
     </tr>
     <tr>
-      <td><strong>Audio Synthesizer</strong></td>
+      <td><strong>Acoustic Synthesizer</strong></td>
       <td>Harmonic Web Audio Tri-Tone Chimes (D5-A5-D6) with Exponential Decay</td>
     </tr>
   </tbody>
@@ -86,60 +86,100 @@
 
 ---
 
-## Core Capabilities
+## Core Capability Modules
 
-### 1. Zero-Cloud Offline Architecture
-- Built strictly to W3C Progressive Web App standards with high-resilience Service Worker caching (`sw.js`).
-- **Operating System Independence**: Runs identically on Android (standalone full-screen APK-like mode), Apple iOS (Safari home-screen mode), Windows, macOS, and Linux desktop browsers.
-- Fully functional in air-gapped environments, rural healthcare settings, basements, or transit with zero cellular data requirement.
+<table width="100%">
+  <tr>
+    <td width="50%" valign="top">
+      <h3>Zero-Cloud Offline Engine</h3>
+      <code>STATUS: 100% AIR-GAPPED CAPABLE</code>
+      <br/><br/>
+      Built strictly to W3C Progressive Web App standards with high-resilience Service Worker caching (<code>sw.js</code>). Runs identically across Android, Apple iOS, Windows, macOS, and Linux desktop browsers. Fully operational in basements, transit, or rural zones with zero cellular connectivity.
+    </td>
+    <td width="50%" valign="top">
+      <h3>NLEM 2022 Clinical Formulary</h3>
+      <code>STATUS: 112+ VALIDATED SALTS</code>
+      <br/><br/>
+      Pre-loaded with 112+ essential medicine formulations conforming to CDSCO and NLEM 2022 standards across 13 therapeutic classes. Three-tier keyboard-accessible fuzzy search instantly populates dosage strengths, chemical molecules, and therapeutic food instructions.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>Natural Accent Speech Synthesis</h3>
+      <code>STATUS: EN • HI • TE VOICE CALIBRATED</code>
+      <br/><br/>
+      Dedicated speech prioritization configured for natural Indian phonetics. Prioritizes Microsoft Aarti Online, Apple Rishi, and Google Indian phonetics with normalized 0.88x cadence and 1.04 pitch for elderly auditory clarity in English, Telugu (తెలుగు), and Hindi (हिन्दी).
+    </td>
+    <td width="50%" valign="top">
+      <h3>Harmonic Web Audio Chimes</h3>
+      <code>STATUS: D5 - A5 - D6 RESONANCE</code>
+      <br/><br/>
+      Zero-file Web Audio API algorithmic chime generator. Synthesizes gentle tri-tone acoustic alerts (587 Hz &rarr; 880 Hz &rarr; 1175 Hz) with natural exponential decay ramps, replacing jarring phone alarms with soothing clinical reminders.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>WhatsApp Pharmacy Refill Dispatcher</h3>
+      <code>STATUS: 1-TAP STANDARDIZED ORDER</code>
+      <br/><br/>
+      Compiles pending shortages and depleted stock into clean, standardized WhatsApp order strings formatted for immediate transmission to neighborhood chemists or delivery services without manual typing.
+    </td>
+    <td width="50%" valign="top">
+      <h3>On-Device Packaging OCR Engine</h3>
+      <code>STATUS: CLIENT-SIDE TESSERACT.JS</code>
+      <br/><br/>
+      HTML5 Canvas pre-processing normalizes contrast and applies adaptive binarization before client-side Tesseract.js optical character recognition extracts brand names and salt strengths without transmitting packaging photos to external servers.
+    </td>
+  </tr>
+</table>
 
-### 2. Clinical Intellisense &amp; NLEM Database
-- Pre-loaded with **112+ essential medicine formulations** conforming to **NLEM 2022** and **CDSCO** guidelines across 13 clinical classifications:
-  - **Type 2 Diabetes**: Glycomet 500/850/1000 SR, Glycomet-GP, Januvia, Galvus Met, Forxiga, Jardiance, Amaryl, Lantus.
-  - **Hypertension &amp; Cardiology**: Telma 40/AM/H, Amlong, Cilacar, Starpress XL, Ecosprin 75/150, Atorva, Rosuvas, Concor, Losar.
-  - **Gastric &amp; Acidity**: Pan 40, Pan-D, Omez, Razo, Pantocid, Digene, Gelusil.
-  - **Analgesics &amp; Antipyretics**: Dolo 650, Calpol 500/650, Crocin, Combiflam, Zerodol-P/SP.
-  - **Thyroid Disorders**: Thyronorm (25/50/75/100 mcg), Eltroxin.
-  - **Respiratory Care**: Asthalin Inhaler, Budecort, Foracort, Montair LC, Deriphyllin.
-  - **Vitamins &amp; Neuro Care**: Becosules Z, Neurobion Forte, Shelcal 500, Evion 400.
-  - **Antibiotic Regimens**: Augmentin 625 Duo, Azithral 500, Taxim-O, Cifran.
-- **Three-Tier Fuzzy Search**: Real-time keyboard-accessible (`Up`, `Down`, `Enter`, `Escape`) query engine with substring and prefix matching.
-- **Automated Clinical Population**: Instantly populates brand name, active chemical molecule, strength, dosage format, therapeutic classification, and medical food timing.
+---
 
-### 3. Automatic Condition-Based Prescribing
-- Inspects a patient's pre-diagnosed clinical conditions (e.g., *Type 2 Diabetes, Primary Hypertension*).
-- Form automatically highlights and pre-selects relevant condition chips to accelerate prescription entry without manual classification errors.
+## Multi-Role Access Control (RBAC)
 
-### 4. Natural Accent Voice Assistance
-- Dedicated speech synthesis prioritization engine configured for natural Indian phonetics:
-  - **Windows &amp; Edge**: Prioritizes `Microsoft Aarti Online (Natural)`, `Heera`, or `Neerja`.
-  - **Apple Safari (iOS &amp; macOS)**: Prioritizes `Rishi`, `Sangeeta`, `Veena`, `Lekha`, or `Neel`.
-  - **Google Chrome &amp; Android**: Prioritizes `Google English (India)`, `Google Hindi`, or `Google Telugu`.
-- **Acoustic Calibration**: Normalized `0.88x` playback speed, `1.04` pitch multiplier, and structured pause breaks to ensure clear audibility for elderly household members.
-- Multilingual translation support across **English**, **Telugu (తెలుగు)**, and **Hindi (हिन्दी)**.
-
-### 5. Harmonic Web Audio Acoustic Chimes
-- Zero-external-file audio synthesizer built directly on the Web Audio API.
-- Generates precise harmonic tri-tone reminders (D5: 587 Hz &rarr; A5: 880 Hz &rarr; D6: 1175 Hz) with natural exponential decay gain ramps, avoiding jarring alarm noise.
-- Low-overhead background interval scheduler verifies pending doses every 15 seconds with haptic feedback integration.
-
-### 6. WhatsApp Pharmacy Refill Dispatcher
-- Compiles pending and depleted medicine orders into a standardized, clean message ready for instant transmission to local chemists and national pharmacies:
-  ```text
-  Namaste! Please deliver pharmacy medicine refill for Sharma Family:
-  1. Glycomet 500 (Metformin 500 mg) - 2 Strips [Patient: Aditya Sharma]
-  2. Telma 40 (Telmisartan 40 mg) - 2 Strips [Patient: Father]
-  (Sent via MEDIC Health System)
-  ```
-
-### 7. Client-Side Tesseract.js Optical Character Recognition (OCR)
-- Point camera or upload a photograph of any blister strip or prescription packaging.
-- On-device HTML5 Canvas preprocessing applies grayscale normalization and threshold contrast filtering before passing data to client-side Tesseract.js OCR, extracting brand names and chemical compositions without uploading photographs to external servers.
-
-### 8. Role-Based Access Control (RBAC)
-- **CARETAKER**: Full administrative access. Prescribe schedules, register family members, scan blister packs, record purchases, and manage database backups.
-- **ADULT**: Operational access. Mark taken doses, track personal routines, record expense purchases, and view schedules.
-- **PATIENT (Senior Mode)**: Clean, high-contrast visual display. Mark doses taken, listen to voice instructions, and inspect remaining stock with destructive operations locked out.
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="33%" align="center">CARETAKER MODE</th>
+      <th width="33%" align="center">ADULT MEMBER MODE</th>
+      <th width="34%" align="center">SENIOR PATIENT MODE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td valign="top">
+        <strong>Administrative Control</strong>
+        <ul>
+          <li>Prescribe medicine regimens</li>
+          <li>Register household members</li>
+          <li>Scan blister packaging via OCR</li>
+          <li>Record pharmacy purchases</li>
+          <li>Manage local database backups</li>
+        </ul>
+      </td>
+      <td valign="top">
+        <strong>Operational Execution</strong>
+        <ul>
+          <li>Log taken and skipped doses</li>
+          <li>Track personal daily schedules</li>
+          <li>Record expense line items</li>
+          <li>Inspect current stock inventory</li>
+          <li>Trigger WhatsApp reorders</li>
+        </ul>
+      </td>
+      <td valign="top">
+        <strong>Accessible Simplicity</strong>
+        <ul>
+          <li>High-contrast visual layout</li>
+          <li>One-tap dose confirmation</li>
+          <li>Aarti natural voice read-aloud</li>
+          <li>Large readable font scaling</li>
+          <li>Destructive settings locked out</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
@@ -149,13 +189,13 @@
 <summary><strong>NLEM 2022 &amp; CDSCO Formulary Classification Reference</strong></summary>
 <br/>
 
-<table>
+<table width="100%">
   <thead>
     <tr>
-      <th align="left">Clinical Classification</th>
-      <th align="left">Reference Formulations</th>
-      <th align="left">Standard Food Timing</th>
-      <th align="left">Primary Regulatory Basis</th>
+      <th width="25%" align="left">Clinical Classification</th>
+      <th width="35%" align="left">Reference Formulations</th>
+      <th width="20%" align="left">Standard Food Timing</th>
+      <th width="20%" align="left">Regulatory Standard</th>
     </tr>
   </thead>
   <tbody>
