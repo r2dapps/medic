@@ -311,8 +311,83 @@
       { id: 'cat_109', brand: "Ciplox Eye Drops", generic: "Ciprofloxacin Ophthalmic", strength: "0.3% w/v", form: "Drops", mfr: "Cipla Ltd", category: "Respiratory Care", source: "NLEM", foodTiming: "Anytime" },
       { id: 'cat_110', brand: "Betadine 10% Ointment", generic: "Povidone Iodine", strength: "10% w/w", form: "Ointment", mfr: "Win-Medicare", category: "General Supplements", source: "NLEM", foodTiming: "Anytime" },
       { id: 'cat_111', brand: "Candid-B Cream", generic: "Clotrimazole + Beclomethasone Dipropionate", strength: "1%/0.025%", form: "Cream", mfr: "Glenmark", category: "General Supplements", source: "CDSCO", foodTiming: "Anytime" },
-      { id: 'cat_112', brand: "Volini Gel", generic: "Diclofenac + Methyl Salicylate + Menthol", strength: "Standard", form: "Ointment", mfr: "Sun Pharma", category: "Bone and Joint Care", source: "CDSCO", foodTiming: "Anytime" }
+      { id: 'cat_112', brand: "Volini Gel", generic: "Diclofenac + Methyl Salicylate + Menthol", strength: "Standard", form: "Ointment", mfr: "Sun Pharma", category: "Bone and Joint Care", source: "CDSCO", foodTiming: "Anytime" },
+
+      // --- Jan Aushadhi Generic Formulations (Pradhan Mantri Bhartiya Janaushadhi Pariyojana - PMBJP) ---
+      { id: 'cat_113', brand: "Metformin IP 500mg", generic: "Metformin Hydrochloride", strength: "500 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Type 2 Diabetes", source: "PMBJP / NLEM", foodTiming: "With Food", isGeneric: true },
+      { id: 'cat_114', brand: "Metformin PR IP 1000mg", generic: "Metformin Hydrochloride Prolonged-Release", strength: "1000 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Type 2 Diabetes", source: "PMBJP / NLEM", foodTiming: "With Food", isGeneric: true },
+      { id: 'cat_115', brand: "Paracetamol IP 650mg", generic: "Paracetamol", strength: "650 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Fever and Pain", source: "PMBJP / NLEM", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_116', brand: "Paracetamol IP 500mg", generic: "Paracetamol", strength: "500 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Fever and Pain", source: "PMBJP / NLEM", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_117', brand: "Telmisartan IP 40mg", generic: "Telmisartan", strength: "40 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Blood Pressure / Hypertension", source: "PMBJP / NLEM", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_118', brand: "Telmisartan and Amlodipine IP", generic: "Telmisartan + Amlodipine", strength: "40mg/5mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Blood Pressure / Hypertension", source: "PMBJP / CDSCO", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_119', brand: "Amlodipine IP 5mg", generic: "Amlodipine Besylate", strength: "5 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Blood Pressure / Hypertension", source: "PMBJP / NLEM", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_120', brand: "Atorvastatin IP 10mg", generic: "Atorvastatin Calcium", strength: "10 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Heart and Cardiovascular Care", source: "PMBJP / NLEM", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_121', brand: "Atorvastatin IP 20mg", generic: "Atorvastatin Calcium", strength: "20 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Heart and Cardiovascular Care", source: "PMBJP / NLEM", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_122', brand: "Rosuvastatin IP 10mg", generic: "Rosuvastatin Calcium", strength: "10 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Heart and Cardiovascular Care", source: "PMBJP / NLEM", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_123', brand: "Pantoprazole Gastro-Resistant IP 40mg", generic: "Pantoprazole Sodium", strength: "40 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Gastric and Acid Reflux", source: "PMBJP / NLEM", foodTiming: "Before Food (Empty Stomach)", isGeneric: true },
+      { id: 'cat_124', brand: "Pantoprazole and Domperidone IP", generic: "Pantoprazole + Domperidone", strength: "40mg/30mg", form: "Capsule", mfr: "Jan Aushadhi (PMBJP)", category: "Gastric and Acid Reflux", source: "PMBJP / CDSCO", foodTiming: "Before Food (Empty Stomach)", isGeneric: true },
+      { id: 'cat_125', brand: "Omeprazole IP 20mg", generic: "Omeprazole", strength: "20 mg", form: "Capsule", mfr: "Jan Aushadhi (PMBJP)", category: "Gastric and Acid Reflux", source: "PMBJP / NLEM", foodTiming: "Before Food (Empty Stomach)", isGeneric: true },
+      { id: 'cat_126', brand: "Rabeprazole IP 20mg", generic: "Rabeprazole Sodium", strength: "20 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Gastric and Acid Reflux", source: "PMBJP / NLEM", foodTiming: "Before Food (Empty Stomach)", isGeneric: true },
+      { id: 'cat_127', brand: "Levothyroxine Sodium IP 100mcg", generic: "Thyroxine Sodium", strength: "100 mcg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Thyroid", source: "PMBJP / CDSCO", foodTiming: "Early Morning (Empty Stomach)", isGeneric: true },
+      { id: 'cat_128', brand: "Levothyroxine Sodium IP 50mcg", generic: "Thyroxine Sodium", strength: "50 mcg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Thyroid", source: "PMBJP / CDSCO", foodTiming: "Early Morning (Empty Stomach)", isGeneric: true },
+      { id: 'cat_129', brand: "Levothyroxine Sodium IP 25mcg", generic: "Thyroxine Sodium", strength: "25 mcg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Thyroid", source: "PMBJP / CDSCO", foodTiming: "Early Morning (Empty Stomach)", isGeneric: true },
+      { id: 'cat_130', brand: "Azithromycin IP 500mg", generic: "Azithromycin Dihydrate", strength: "500 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Antibiotics & Infections", source: "PMBJP / NLEM", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_131', brand: "Amoxicillin and Potassium Clavulanate IP 625mg", generic: "Amoxicillin + Clavulanic Acid", strength: "500mg/125mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Antibiotics & Infections", source: "PMBJP / NLEM", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_132', brand: "Cefixime IP 200mg", generic: "Cefixime Trihydrate", strength: "200 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Antibiotics & Infections", source: "PMBJP / NLEM", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_133', brand: "Ciprofloxacin IP 500mg", generic: "Ciprofloxacin Hydrochloride", strength: "500 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Antibiotics & Infections", source: "PMBJP / NLEM", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_134', brand: "Levocetirizine IP 5mg", generic: "Levocetirizine Dihydrochloride", strength: "5 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Respiratory Care", source: "PMBJP / CDSCO", foodTiming: "Night", isGeneric: true },
+      { id: 'cat_135', brand: "Montelukast and Levocetirizine IP", generic: "Montelukast + Levocetirizine", strength: "10mg/5mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Respiratory Care", source: "PMBJP / CDSCO", foodTiming: "Night", isGeneric: true },
+      { id: 'cat_136', brand: "Salbutamol Inhaler IP 100mcg", generic: "Salbutamol", strength: "100 mcg", form: "Inhaler", mfr: "Jan Aushadhi (PMBJP)", category: "Respiratory Care", source: "PMBJP / NLEM", foodTiming: "Anytime", isGeneric: true },
+      { id: 'cat_137', brand: "Calcium and Vitamin D3 IP", generic: "Calcium Carbonate + Cholecalciferol", strength: "500mg/250IU", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Bone and Joint Care", source: "PMBJP / CDSCO", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_138', brand: "Vitamin B-Complex with Zinc", generic: "B-Complex + Vitamin C + Zinc", strength: "Standard", form: "Capsule", mfr: "Jan Aushadhi (PMBJP)", category: "Vitamin Deficiency", source: "PMBJP / CDSCO", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_139', brand: "Cholecalciferol Capsules IP 60K", generic: "Vitamin D3", strength: "60,000 IU", form: "Capsule", mfr: "Jan Aushadhi (PMBJP)", category: "Bone and Joint Care", source: "PMBJP / CDSCO", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_140', brand: "Ascorbic Acid IP 500mg", generic: "Vitamin C", strength: "500 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Vitamin Deficiency", source: "PMBJP / NLEM", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_141', brand: "Ferrous Ascorbate and Folic Acid IP", generic: "Elemental Iron + Folic Acid", strength: "100mg/1.5mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Vitamin Deficiency", source: "PMBJP / CDSCO", foodTiming: "After Food", isGeneric: true },
+      { id: 'cat_142', brand: "Glimepiride IP 1mg", generic: "Glimepiride", strength: "1 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Type 2 Diabetes", source: "PMBJP / CDSCO", foodTiming: "Before Food", isGeneric: true },
+      { id: 'cat_143', brand: "Glimepiride IP 2mg", generic: "Glimepiride", strength: "2 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Type 2 Diabetes", source: "PMBJP / CDSCO", foodTiming: "Before Food", isGeneric: true },
+      { id: 'cat_144', brand: "Vildagliptin IP 50mg", generic: "Vildagliptin", strength: "50 mg", form: "Tablet", mfr: "Jan Aushadhi (PMBJP)", category: "Type 2 Diabetes", source: "PMBJP / CDSCO", foodTiming: "With Food", isGeneric: true },
+      { id: 'cat_145', brand: "ORS Oral Rehydration Salts IP", generic: "Sodium Chloride + Potassium Chloride + Dextrose", strength: "21.8g Sachet", form: "Sachet", mfr: "Jan Aushadhi (PMBJP)", category: "Gastric and Acid Reflux", source: "PMBJP / NLEM", foodTiming: "Anytime", isGeneric: true }
     ];
+
+    // --- PROGRESSIVE ONLINE MEDICINE LOOKUP (OPENFDA / RXNORM) ---
+    async function lookupOnlineMedicine(query) {
+      if (!navigator.onLine || !query || query.trim().length < 2) return [];
+      try {
+        const cleanQ = encodeURIComponent(query.trim());
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 4000);
+
+        const res = await fetch(`https://api.fda.gov/drug/label.json?search=openfda.brand_name:"${cleanQ}"+openfda.generic_name:"${cleanQ}"&limit=3`, {
+          signal: controller.signal
+        });
+        clearTimeout(timeout);
+
+        if (!res.ok) return [];
+        const data = await res.json();
+        if (!data.results || data.results.length === 0) return [];
+
+        return data.results.map((r, idx) => {
+          const openfda = r.openfda || {};
+          const brand = (openfda.brand_name && openfda.brand_name[0]) || query;
+          const generic = (openfda.generic_name && openfda.generic_name[0]) || '';
+          const form = (openfda.dosage_form && openfda.dosage_form[0]) || 'Tablet';
+          return {
+            id: `online_${Date.now()}_${idx}`,
+            brand: brand.charAt(0).toUpperCase() + brand.slice(1).toLowerCase(),
+            generic: generic.charAt(0).toUpperCase() + generic.slice(1).toLowerCase(),
+            strength: 'Standard',
+            form: form.charAt(0).toUpperCase() + form.slice(1).toLowerCase(),
+            mfr: (openfda.manufacturer_name && openfda.manufacturer_name[0]) || 'Verified Pharma',
+            category: 'General Therapeutics',
+            source: 'OpenFDA / Verified Online',
+            foodTiming: 'After Food',
+            isOnline: true
+          };
+        });
+      } catch (err) {
+        return [];
+      }
+    }
 
     // --- Application State ---
     const AppState = {
@@ -718,7 +793,7 @@
       }, 40);
 
       const voiceLabel = selectedVoice ? ` (${selectedVoice.name.split('-')[0].trim()})` : '';
-      showToast(`🔊 Reading: ${medName}${voiceLabel}`, 'info');
+      showToast(`Reading: ${medName}${voiceLabel}`, 'info');
     }
 
     // --- ENFORCE ROLE PERMISSIONS ON UI ---
@@ -1895,14 +1970,15 @@
         
         const catOptions = [
           { id: 'ALL', label: 'All Categories' },
-          { id: 'Type 2 Diabetes', label: '🍬 Diabetes' },
-          { id: 'Blood Pressure / Hypertension', label: '🩸 Blood Pressure' },
-          { id: 'Gastric and Acid Reflux', label: '🔥 Acidity' },
-          { id: 'Fever and Pain', label: '💊 Fever & Pain' },
-          { id: 'Heart and Cardiovascular Care', label: '🫀 Heart & Lipids' },
-          { id: 'Thyroid', label: '🦋 Thyroid' },
-          { id: 'Respiratory Care', label: '🫁 Asthma' },
-          { id: 'Vitamin Deficiency', label: '🥗 Vitamins' }
+          { id: 'PMBJP', label: 'Jan Aushadhi Generics' },
+          { id: 'Type 2 Diabetes', label: 'Diabetes' },
+          { id: 'Blood Pressure / Hypertension', label: 'Blood Pressure' },
+          { id: 'Gastric and Acid Reflux', label: 'Acidity & Gastric' },
+          { id: 'Fever and Pain', label: 'Fever & Pain' },
+          { id: 'Heart and Cardiovascular Care', label: 'Heart & Lipids' },
+          { id: 'Thyroid', label: 'Thyroid' },
+          { id: 'Respiratory Care', label: 'Respiratory & Asthma' },
+          { id: 'Vitamin Deficiency', label: 'Vitamins & Minerals' }
         ];
 
         catOptions.forEach(opt => {
@@ -1926,7 +2002,8 @@
       const filtered = AppState.medicines.filter(m => {
         const matchMember = AppState.activeMemberId === 'ALL' || m.memberId === AppState.activeMemberId;
         const matchCat = !AppState.activeCategoryFilter || AppState.activeCategoryFilter === 'ALL' || 
-                         (m.category && (m.category === AppState.activeCategoryFilter || m.category.includes(AppState.activeCategoryFilter.split(' ')[0])));
+                         (AppState.activeCategoryFilter === 'PMBJP' ? (m.isGeneric || (m.brand && m.brand.includes('IP')) || (m.source && m.source.includes('PMBJP'))) :
+                         (m.category && (m.category === AppState.activeCategoryFilter || m.category.includes(AppState.activeCategoryFilter.split(' ')[0]))));
         const matchSearch = m.brand.toLowerCase().includes(searchVal) || 
                             (m.generic && m.generic.toLowerCase().includes(searchVal)) ||
                             (m.category && m.category.toLowerCase().includes(searchVal));
@@ -2280,26 +2357,29 @@
 
       container.innerHTML = '';
       const cats = [
-        { id: 'ALL', label: '✨ All (112+)' },
-        { id: 'Type 2 Diabetes', label: '🍬 Diabetes' },
-        { id: 'Blood Pressure / Hypertension', label: '🩸 Blood Pressure' },
-        { id: 'Gastric and Acid Reflux', label: '🔥 Acidity' },
-        { id: 'Fever and Pain', label: '💊 Fever & Pain' },
-        { id: 'Heart and Cardiovascular Care', label: '🫀 Heart' },
-        { id: 'Thyroid', label: '🦋 Thyroid' },
-        { id: 'Respiratory Care', label: '🫁 Asthma' },
-        { id: 'Vitamin Deficiency', label: '🥗 Vitamins' },
-        { id: 'Antibiotics & Infections', label: '🛡️ Antibiotics' }
+        { id: 'ALL', label: 'All Formulations' },
+        { id: 'PMBJP', label: 'Jan Aushadhi Generics' },
+        { id: 'Type 2 Diabetes', label: 'Diabetes' },
+        { id: 'Blood Pressure / Hypertension', label: 'Blood Pressure' },
+        { id: 'Gastric and Acid Reflux', label: 'Acidity & Gastric' },
+        { id: 'Fever and Pain', label: 'Fever & Pain' },
+        { id: 'Heart and Cardiovascular Care', label: 'Cardiovascular' },
+        { id: 'Thyroid', label: 'Thyroid' },
+        { id: 'Respiratory Care', label: 'Respiratory & Asthma' },
+        { id: 'Vitamin Deficiency', label: 'Vitamins & Minerals' },
+        { id: 'Antibiotics & Infections', label: 'Antibiotics' }
       ];
 
       const count = activeModalCategory === 'ALL' 
         ? INDIAN_MED_CATALOGUE.length 
-        : INDIAN_MED_CATALOGUE.filter(m => m.category === activeModalCategory || (m.category && m.category.includes(activeModalCategory.split(' ')[0]))).length;
+        : activeModalCategory === 'PMBJP'
+          ? INDIAN_MED_CATALOGUE.filter(m => m.isGeneric || (m.source && m.source.includes('PMBJP'))).length
+          : INDIAN_MED_CATALOGUE.filter(m => m.category === activeModalCategory || (m.category && m.category.includes(activeModalCategory.split(' ')[0]))).length;
 
       if (badge) {
         badge.textContent = activeModalCategory === 'ALL' 
-          ? `All ${count} Medicines` 
-          : `${count} Verified Medicines`;
+          ? `All ${count} Formulations` 
+          : `${count} Verified Formulations`;
       }
 
       cats.forEach(c => {
@@ -2313,7 +2393,7 @@
           renderModalCategoryChips();
           
           const catSelect = document.getElementById('medFormCategory');
-          if (c.id !== 'ALL' && catSelect) {
+          if (c.id !== 'ALL' && c.id !== 'PMBJP' && catSelect) {
             const matchOpt = Array.from(catSelect.options).find(o => o.value === c.id || o.value.includes(c.id.split(' ')[0]));
             if (matchOpt) catSelect.value = matchOpt.value;
           }
@@ -2441,6 +2521,7 @@
 
       let selectedIndex = -1;
       let currentMatches = [];
+      let onlineSearchTimer = null;
 
       function renderSuggestions(matches, query) {
         currentMatches = matches;
@@ -2454,26 +2535,46 @@
         const qLower = (query || '').toLowerCase();
         suggestionsBox.innerHTML = matches.map((item, idx) => {
           const bName = item.brand;
+          const gName = item.generic || '';
           const matchIdx = qLower ? bName.toLowerCase().indexOf(qLower) : -1;
           let brandHtml = bName;
           if (matchIdx !== -1) {
             brandHtml = `${bName.substring(0, matchIdx)}<span class="text-teal-primary font-extrabold underline">${bName.substring(matchIdx, matchIdx + qLower.length)}</span>${bName.substring(matchIdx + qLower.length)}`;
           }
 
+          const genMatchIdx = qLower ? gName.toLowerCase().indexOf(qLower) : -1;
+          let genericHtml = gName;
+          if (genMatchIdx !== -1) {
+            genericHtml = `${gName.substring(0, genMatchIdx)}<span class="text-teal-primary font-bold underline">${gName.substring(genMatchIdx, genMatchIdx + qLower.length)}</span>${gName.substring(genMatchIdx + qLower.length)}`;
+          }
+
+          const badgeClass = item.isGeneric 
+            ? 'bg-teal-subtle text-teal-dark border border-teal-primary/30' 
+            : item.isOnline 
+              ? 'bg-blue-50 text-blue-700 border border-blue-200' 
+              : 'border border-surface-border text-charcoal-muted';
+
+          const badgeLabel = item.isGeneric 
+            ? 'Jan Aushadhi Generic' 
+            : item.isOnline 
+              ? 'OpenFDA Online' 
+              : (item.source || 'NLEM/CDSCO');
+
           return `
             <div class="intellisense-item p-3 hover:bg-teal-50/80 cursor-pointer transition-colors flex items-center justify-between text-left" data-index="${idx}">
               <div class="space-y-0.5 flex-1 pr-2">
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 flex-wrap">
                   <span class="font-bold text-sm text-charcoal">${brandHtml}</span>
                   <span class="text-[11px] font-semibold text-teal-dark bg-teal-subtle px-1.5 py-0.5 rounded">${item.strength || ''}</span>
                   <span class="text-[10px] uppercase font-bold text-charcoal-muted border border-surface-border px-1.5 py-0.2 rounded">${item.form || 'Tab'}</span>
+                  <span class="text-[10px] font-semibold px-1.5 py-0.2 rounded ${badgeClass}">${badgeLabel}</span>
                 </div>
                 <div class="text-xs text-charcoal-muted truncate">
-                  <span class="font-medium text-charcoal">${item.generic}</span> • ${item.mfr}
+                  <span class="font-medium text-charcoal">${genericHtml}</span> • ${item.mfr}
                 </div>
                 <div class="text-[10px] text-teal-primary font-medium flex items-center gap-1 mt-0.5">
                   <i data-lucide="shield-check" class="w-3 h-3"></i>
-                  <span>${item.category} • ${item.source || 'NLEM/CDSCO'}</span>
+                  <span>${item.category} • ${item.foodTiming || 'Anytime'}</span>
                 </div>
               </div>
               <div class="text-[10px] text-teal-dark font-semibold bg-surface-subtle border border-surface-border px-2 py-1 rounded-lg shrink-0">
@@ -2487,7 +2588,7 @@
         lucide.createIcons({ root: suggestionsBox });
       }
 
-      function selectMedicine(item) {
+      async function selectMedicine(item) {
         brandInput.value = item.brand;
         const genInput = document.getElementById('medFormGeneric');
         const strInput = document.getElementById('medFormStrength');
@@ -2510,6 +2611,25 @@
           if (matchFood) foodSelect.value = matchFood.value;
         }
 
+        if (item.isOnline && AppState.db) {
+          try {
+            await dbPut('MedicineCatalogue', {
+              id: item.id,
+              brand: item.brand,
+              generic: item.generic,
+              strength: item.strength,
+              form: item.form,
+              mfr: item.mfr,
+              category: item.category,
+              source: 'OpenFDA Cached',
+              foodTiming: item.foodTiming,
+              isGeneric: false
+            });
+          } catch (e) {
+            console.warn('Failed to cache online medicine:', e);
+          }
+        }
+
         suggestionsBox.classList.add('hidden');
         if (autofillBadge) {
           autofillBadge.classList.remove('hidden');
@@ -2528,7 +2648,11 @@
 
         let dataset = INDIAN_MED_CATALOGUE;
         if (activeModalCategory && activeModalCategory !== 'ALL') {
-          dataset = INDIAN_MED_CATALOGUE.filter(m => m.category === activeModalCategory || (m.category && m.category.includes(activeModalCategory.split(' ')[0])));
+          if (activeModalCategory === 'PMBJP') {
+            dataset = INDIAN_MED_CATALOGUE.filter(m => m.isGeneric || (m.source && m.source.includes('PMBJP')));
+          } else {
+            dataset = INDIAN_MED_CATALOGUE.filter(m => m.category === activeModalCategory || (m.category && m.category.includes(activeModalCategory.split(' ')[0])));
+          }
         }
 
         if (query.length < 1) {
@@ -2549,11 +2673,11 @@
           const gLower = (item.generic || '').toLowerCase();
           const cLower = (item.category || '').toLowerCase();
 
-          if (bLower.startsWith(query)) {
+          if (bLower.startsWith(query) || gLower.startsWith(query)) {
             p1.push(item);
-          } else if (bLower.includes(query)) {
+          } else if (bLower.includes(query) || gLower.includes(query)) {
             p2.push(item);
-          } else if (gLower.includes(query) || cLower.includes(query)) {
+          } else if (cLower.includes(query)) {
             p3.push(item);
           }
         });
@@ -2563,14 +2687,32 @@
           INDIAN_MED_CATALOGUE.forEach(item => {
             if (!dataset.includes(item)) {
               const bLower = item.brand.toLowerCase();
-              if (bLower.startsWith(query)) p1.push(item);
-              else if (bLower.includes(query)) p2.push(item);
+              const gLower = (item.generic || '').toLowerCase();
+              if (bLower.startsWith(query) || gLower.startsWith(query)) p1.push(item);
+              else if (bLower.includes(query) || gLower.includes(query)) p2.push(item);
             }
           });
         }
 
         const combined = [...p1, ...p2, ...p3].slice(0, 8);
         renderSuggestions(combined, query);
+
+        // Progressive Online Lookup Debounce (when online and query >= 3 characters)
+        clearTimeout(onlineSearchTimer);
+        if (navigator.onLine && query.length >= 3) {
+          onlineSearchTimer = setTimeout(async () => {
+            if (brandInput.value.trim().toLowerCase() !== query) return;
+            const onlineResults = await lookupOnlineMedicine(query);
+            if (onlineResults.length > 0 && brandInput.value.trim().toLowerCase() === query) {
+              const currentIds = new Set(currentMatches.map(m => m.brand.toLowerCase()));
+              const freshOnline = onlineResults.filter(o => !currentIds.has(o.brand.toLowerCase()));
+              if (freshOnline.length > 0) {
+                const merged = [...currentMatches, ...freshOnline].slice(0, 10);
+                renderSuggestions(merged, query);
+              }
+            }
+          }, 400);
+        }
       });
 
       brandInput.addEventListener('focus', () => {
@@ -3263,7 +3405,7 @@
         testAlarmBtn.addEventListener('click', () => {
           AlarmEngine.playChime('chime');
           triggerHaptic('success');
-          showToast('🔔 Playing dose reminder chime...', 'info');
+          showToast('Playing dose reminder chime...', 'info');
         });
       }
 
@@ -3823,7 +3965,7 @@
         deferredPwaPrompt = null;
         const banner = document.getElementById('pwaInstallBanner');
         if (banner) banner.classList.add('hidden');
-        showToast('🎉 MEDIC successfully installed on your device!', 'success');
+        showToast('MEDIC successfully installed on your device.', 'success');
         updatePwaInstallUI();
       });
 

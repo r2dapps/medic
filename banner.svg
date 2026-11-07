@@ -1,139 +1,307 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="100%" height="100%">
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="1200" height="420"
+     viewBox="0 0 1200 420">
+
   <defs>
-    <!-- Background Gradient -->
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#042F2E" />
-      <stop offset="50%" stop-color="#0F766E" />
-      <stop offset="100%" stop-color="#115E59" />
+    <!-- Background -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#07111F"/>
+      <stop offset="55%" stop-color="#0B2534"/>
+      <stop offset="100%" stop-color="#0F3D43"/>
     </linearGradient>
 
-    <!-- Medical Glow Filter -->
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="8" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
+    <!-- Accent -->
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0F766E"/>
+      <stop offset="50%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#14B8A6"/>
+    </linearGradient>
 
-    <!-- Pulse Animation -->
-    <style>
-      .pulse-cross {
-        transform-origin: 55px 55px;
-        animation: pulse 3s ease-in-out infinite;
-      }
-      .wave-line {
-        stroke-dasharray: 800;
-        stroke-dashoffset: 800;
-        animation: drawLine 4s linear infinite;
-      }
-      .badge-glow {
-        animation: floatBadge 4s ease-in-out infinite alternate;
-      }
-      .shimmer-text {
-        animation: shimmer 6s ease-in-out infinite;
-      }
-      @keyframes pulse {
-        0%, 100% { transform: scale(1); opacity: 0.95; }
-        50% { transform: scale(1.06); opacity: 1; filter: drop-shadow(0 0 12px #2DD4BF); }
-      }
-      @keyframes drawLine {
-        0% { stroke-dashoffset: 800; }
-        50% { stroke-dashoffset: 0; }
-        100% { stroke-dashoffset: -800; }
-      }
-      @keyframes floatBadge {
-        0% { transform: translateY(0px); }
-        100% { transform: translateY(-5px); }
-      }
-      @keyframes shimmer {
-        0%, 100% { opacity: 0.85; }
-        50% { opacity: 1; }
-      }
-    </style>
+    <!-- Animated ECG Stroke -->
+    <linearGradient id="ecgGradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#14B8A6" stop-opacity="0.1"/>
+      <stop offset="50%" stop-color="#67E8F9"/>
+      <stop offset="100%" stop-color="#14B8A6" stop-opacity="0.1"/>
+    </linearGradient>
+
+    <!-- Background Scan -->
+    <linearGradient id="scanGradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#22D3EE" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Animated ECG Clip -->
+    <clipPath id="ecgClip">
+      <rect x="0" y="0" width="1200" height="420"/>
+    </clipPath>
   </defs>
 
-  <!-- Canvas Background -->
-  <rect width="1200" height="420" rx="24" fill="url(#bgGrad)" />
+  <!-- BACKGROUND -->
+  <rect width="1200" height="420" rx="24" fill="url(#bg)"/>
 
-  <!-- Subtle Grid Pattern Background -->
-  <g opacity="0.08" stroke="#FFFFFF" stroke-width="1">
-    <line x1="100" y1="0" x2="100" y2="420" />
-    <line x1="200" y1="0" x2="200" y2="420" />
-    <line x1="300" y1="0" x2="300" y2="420" />
-    <line x1="400" y1="0" x2="400" y2="420" />
-    <line x1="500" y1="0" x2="500" y2="420" />
-    <line x1="600" y1="0" x2="600" y2="420" />
-    <line x1="700" y1="0" x2="700" y2="420" />
-    <line x1="800" y1="0" x2="800" y2="420" />
-    <line x1="900" y1="0" x2="900" y2="420" />
-    <line x1="1000" y1="0" x2="1000" y2="420" />
-    <line x1="1100" y1="0" x2="1100" y2="420" />
-    <line x1="0" y1="70" x2="1200" y2="70" />
-    <line x1="0" y1="140" x2="1200" y2="140" />
-    <line x1="0" y1="210" x2="1200" y2="210" />
-    <line x1="0" y1="280" x2="1200" y2="280" />
-    <line x1="0" y1="350" x2="1200" y2="350" />
+  <!-- GRID -->
+  <g stroke="#94A3B8" stroke-width="1" opacity="0.055">
+    <path d="
+      M100 0V420 M200 0V420 M300 0V420
+      M400 0V420 M500 0V420 M600 0V420
+      M700 0V420 M800 0V420 M900 0V420
+      M1000 0V420 M1100 0V420
+      M0 70H1200 M0 140H1200
+      M0 210H1200 M0 280H1200 M0 350H1200
+    "/>
   </g>
 
-  <!-- Animated ECG / Heartbeat Wave -->
-  <path class="wave-line" d="M 0 310 L 250 310 L 280 290 L 305 350 L 335 240 L 365 370 L 395 300 L 420 310 L 750 310 L 780 290 L 805 350 L 835 240 L 865 370 L 895 300 L 920 310 L 1200 310" 
-        fill="none" stroke="#2DD4BF" stroke-width="2.5" opacity="0.4" />
-
-  <!-- Animated Glowing Logo Icon -->
-  <g transform="translate(100, 100)">
-    <g class="pulse-cross">
-      <rect width="110" height="110" rx="28" fill="#134E4A" stroke="#2DD4BF" stroke-width="2.5" />
-      <!-- White Medical Cross -->
-      <path d="M 45 25 L 65 25 L 65 45 L 85 45 L 85 65 L 65 65 L 65 85 L 45 85 L 45 65 L 25 65 L 25 45 L 45 45 Z" fill="#FFFFFF" />
-    </g>
+  <!-- BACKGROUND SCAN ANIMATION -->
+  <g clip-path="url(#ecgClip)">
+    <rect x="-300" y="0" width="220" height="420"
+          fill="url(#scanGradient)">
+      <animate attributeName="x"
+               values="-300;1300"
+               dur="9s"
+               repeatCount="indefinite"/>
+    </rect>
   </g>
 
-  <!-- Brand Typography -->
-  <g transform="translate(240, 145)">
-    <text font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="58" fill="#FFFFFF" letter-spacing="4">
+  <!-- TOP STATUS -->
+  <circle cx="105" cy="39" r="4" fill="#2DD4BF">
+    <animate attributeName="opacity"
+             values="1;0.4;1"
+             dur="2.5s"
+             repeatCount="indefinite"/>
+  </circle>
+
+  <text x="120" y="43"
+        font-family="Arial, sans-serif"
+        font-size="11"
+        font-weight="bold"
+        letter-spacing="2"
+        fill="#5EEAD4">
+    FAMILY HEALTH INTELLIGENCE SYSTEM
+  </text>
+
+  <text x="1100" y="43"
+        text-anchor="end"
+        font-family="Arial, sans-serif"
+        font-size="11"
+        font-weight="bold"
+        letter-spacing="1"
+        fill="#94A3B8">
+    OFFLINE-FIRST / PWA
+  </text>
+
+  <!-- MEDICAL LOGO - STATIC -->
+  <g transform="translate(100 100)">
+    <rect width="112" height="112" rx="25"
+          fill="#103B43"
+          stroke="#2DD4BF"
+          stroke-width="2"/>
+
+    <rect x="8" y="8" width="96" height="96" rx="19"
+          fill="none"
+          stroke="#22D3EE"
+          stroke-opacity="0.25"/>
+
+    <path d="
+      M45 23 H67
+      V45 H89
+      V67 H67
+      V89 H45
+      V67 H23
+      V45 H45 Z
+    " fill="#FFFFFF"/>
+  </g>
+
+  <!-- BRAND TYPOGRAPHY -->
+  <g font-family="Arial, Helvetica, sans-serif">
+
+    <text x="250" y="112"
+          font-size="13"
+          font-weight="bold"
+          letter-spacing="3"
+          fill="#5EEAD4">
+      MEDICAL ROUTINE &amp; INVENTORY SYSTEM
+    </text>
+
+    <text x="250" y="176"
+          font-size="64"
+          font-weight="bold"
+          letter-spacing="5"
+          fill="#F8FAFC">
       MEDIC
     </text>
-    <text x="210" y="-8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="14" fill="#2DD4BF" letter-spacing="2">
-      OFFLINE-FIRST PWA
+
+    <!-- ANIMATED ACCENT UNDERLINE -->
+    <rect x="252" y="190" width="220" height="4"
+          rx="2" fill="#164E63"/>
+
+    <rect x="252" y="190" width="75" height="4"
+          rx="2" fill="url(#accent)">
+      <animate attributeName="x"
+               values="252;397;252"
+               dur="4s"
+               repeatCount="indefinite"/>
+    </rect>
+
+    <text x="250" y="225"
+          font-size="19"
+          fill="#CCFBF1">
+      Family Medicine Routine &amp; Stock Guardian
     </text>
-    <text x="0" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="400" font-size="20" fill="#CCFBF1" class="shimmer-text">
-      Family Medicine Routine &amp; Stock Guardian for Indian Households
+
+    <text x="250" y="253"
+          font-size="14"
+          fill="#94A3B8">
+      Built for multi-generational Indian households
     </text>
-    <text x="0" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="500" font-size="15" fill="#99F6E4" opacity="0.9">
-      NLEM &amp; CDSCO Healthcare Standards • Natural Aarti Voice TTS • 1-Tap WhatsApp Refill
-    </text>
+
   </g>
 
-  <!-- Feature Capsule Badges -->
-  <g transform="translate(100, 320)">
-    <g class="badge-glow">
-      <!-- Badge 1: 100% Offline -->
-      <g transform="translate(0, 0)">
-        <rect width="170" height="42" rx="12" fill="#134E4A" stroke="#14B8A6" stroke-width="1.5" />
-        <text x="85" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">100% Offline PWA</text>
-      </g>
+  <!-- ECG BASELINE -->
+  <path d="
+    M0 285
+    H300
+    L325 285
+    L345 265
+    L365 305
+    L390 235
+    L415 320
+    L440 285
+    H1200
+  "
+  fill="none"
+  stroke="#14B8A6"
+  stroke-width="2"
+  opacity="0.22"/>
 
-      <!-- Badge 2: NLEM Standards -->
-      <g transform="translate(185, 0)">
-        <rect width="185" height="42" rx="12" fill="#134E4A" stroke="#14B8A6" stroke-width="1.5" />
-        <text x="92" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">112+ NLEM Medicines</text>
-      </g>
+  <!-- ECG DRAWING ANIMATION -->
+  <path d="
+    M0 285
+    H300
+    L325 285
+    L345 265
+    L365 305
+    L390 235
+    L415 320
+    L440 285
+    H1200
+  "
+  fill="none"
+  stroke="url(#ecgGradient)"
+  stroke-width="2.5"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-dasharray="700"
+  stroke-dashoffset="700">
 
-      <!-- Badge 3: Voice Reading -->
-      <g transform="translate(385, 0)">
-        <rect width="190" height="42" rx="12" fill="#134E4A" stroke="#14B8A6" stroke-width="1.5" />
-        <text x="95" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">Aarti Natural Voice</text>
-      </g>
+    <animate attributeName="stroke-dashoffset"
+             values="700;0;-700"
+             dur="7s"
+             repeatCount="indefinite"/>
 
-      <!-- Badge 4: Multilingual -->
-      <g transform="translate(590, 0)">
-        <rect width="195" height="42" rx="12" fill="#134E4A" stroke="#14B8A6" stroke-width="1.5" />
-        <text x="97" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">EN • Telugu • Hindi</text>
-      </g>
+  </path>
 
-      <!-- Badge 5: WhatsApp Refill -->
-      <g transform="translate(800, 0)">
-        <rect width="195" height="42" rx="12" fill="#134E4A" stroke="#14B8A6" stroke-width="1.5" />
-        <text x="97" y="26" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">WhatsApp Refill</text>
-      </g>
+  <!-- MOVING ECG SCANNER -->
+  <circle r="4" fill="#67E8F9">
+    <animateMotion
+      dur="7s"
+      repeatCount="indefinite"
+      path="
+        M0 285
+        H300
+        L325 285
+        L345 265
+        L365 305
+        L390 235
+        L415 320
+        L440 285
+        H1200
+      "/>
+  </circle>
+
+  <!-- FEATURE BADGES -->
+  <g font-family="Arial, Helvetica, sans-serif"
+     font-size="13"
+     font-weight="bold"
+     fill="#F0FDFA">
+
+    <g transform="translate(100 330)">
+      <rect width="185" height="42" rx="10"
+            fill="#103B43"
+            stroke="#14B8A6"/>
+      <circle cx="18" cy="21" r="4" fill="#2DD4BF"/>
+      <text x="101" y="26" text-anchor="middle">
+        100% Offline PWA
+      </text>
     </g>
+
+    <g transform="translate(300 330)">
+      <rect width="185" height="42" rx="10"
+            fill="#103B43"
+            stroke="#14B8A6"/>
+      <circle cx="18" cy="21" r="4" fill="#2DD4BF"/>
+      <text x="101" y="26" text-anchor="middle">
+        112+ Medicines
+      </text>
+    </g>
+
+    <g transform="translate(500 330)">
+      <rect width="185" height="42" rx="10"
+            fill="#103B43"
+            stroke="#14B8A6"/>
+      <circle cx="18" cy="21" r="4" fill="#2DD4BF"/>
+      <text x="101" y="26" text-anchor="middle">
+        Natural Voice TTS
+      </text>
+    </g>
+
+    <g transform="translate(700 330)">
+      <rect width="185" height="42" rx="10"
+            fill="#103B43"
+            stroke="#14B8A6"/>
+      <circle cx="18" cy="21" r="4" fill="#2DD4BF"/>
+      <text x="101" y="26" text-anchor="middle">
+        EN / Telugu / Hindi
+      </text>
+    </g>
+
+    <g transform="translate(900 330)">
+      <rect width="185" height="42" rx="10"
+            fill="#103B43"
+            stroke="#14B8A6"/>
+      <circle cx="18" cy="21" r="4" fill="#2DD4BF"/>
+      <text x="101" y="26" text-anchor="middle">
+        WhatsApp Refill
+      </text>
+    </g>
+
   </g>
+
+  <!-- FOOTER -->
+  <g font-family="Arial, Helvetica, sans-serif"
+     font-size="10"
+     font-weight="bold"
+     letter-spacing="1"
+     fill="#94A3B8">
+
+    <text x="100" y="401">
+      PRIVACY-FIRST · CLIENT-SIDE STORAGE · FAMILY CARE
+    </text>
+
+    <text x="1100" y="401" text-anchor="end">
+      RAZEL TECH
+    </text>
+
+  </g>
+
+  <!-- BORDER -->
+  <rect x="1" y="1" width="1198" height="418"
+        rx="24"
+        fill="none"
+        stroke="#2DD4BF"
+        stroke-opacity="0.3"
+        stroke-width="1.5"/>
+
 </svg>
