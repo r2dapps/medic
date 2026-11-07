@@ -2,25 +2,31 @@
 
 <img src="banner.svg" alt="MEDIC — Offline-First Family Medicine Routine &amp; Inventory Guardian" width="100%" />
 
+<br/><br/>
+
+<img src="telemetry.svg" alt="MEDIC Live Telemetry Monitor" width="100%" />
+
+<br/>
+
 # MEDIC
 ### Offline-First Family Medicine Routine &amp; Inventory Guardian
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Launch%20MEDIC-0F766E?style=for-the-badge&logo=googlechrome&logoColor=white)](https://r2dapps.github.io/medic/)
 [![PWA Ready](https://img.shields.io/badge/PWA-Offline%20Capable-14B8A6?style=for-the-badge&logo=pwa&logoColor=white)](https://r2dapps.github.io/medic/)
 [![Medical Standards](https://img.shields.io/badge/Standard-NLEM%202022%20%7C%20CDSCO-teal?style=for-the-badge)](https://cdsco.gov.in/)
-[![Voice TTS](https://img.shields.io/badge/Speech%20Engine-Indian%20Natural%20Accent-0D9488?style=for-the-badge)](#voice-tts)
-[![Zero Cloud Privacy](https://img.shields.io/badge/Privacy-100%25%20Client--Side%20IndexedDB-10B981?style=for-the-badge)](#privacy-architecture)
-[![Powered By](https://img.shields.io/badge/Powered%20By-Razel%20Tech-115E59?style=for-the-badge)](https://razeltech.github.io)
+[![Voice TTS](https://img.shields.io/badge/Speech%20Engine-Indian%20Natural%20Accent-0D9488?style=for-the-badge)](#natural-accent-voice-assistance)
+[![Zero Cloud Privacy](https://img.shields.io/badge/Privacy-100%25%20Client--Side%20IndexedDB-10B981?style=for-the-badge)](#zero-cloud-offline-architecture)
+[![Published By](https://img.shields.io/badge/Published%20By-R2D%20Apps-115E59?style=for-the-badge)](https://r2dapps.github.io)
 
 <p align="center">
-  <strong>A resilient, 100% offline-first Progressive Web Application (PWA) tailored for multi-generational households to track clinical routines, inventory stock depletion, optical packaging recognition, and pharmacy reorders with zero subscription fees, zero cloud surveillance, and authentic natural Indian accent voice guidance.</strong>
+  <strong>A resilient, 100% offline-first Progressive Web Application (PWA) tailored for multi-generational Indian households to track clinical routines, inventory stock depletion, optical packaging recognition, and pharmacy reorders with zero subscription fees, zero cloud surveillance, and authentic natural Indian accent voice guidance.</strong>
 </p>
 
 <p align="center">
   <a href="https://r2dapps.github.io/medic/"><strong>[ Launch Web Application ]</strong></a> &nbsp;&bull;&nbsp;
+  <a href="#clinical-system-overview"><strong>[ System Overview ]</strong></a> &nbsp;&bull;&nbsp;
   <a href="#core-capabilities"><strong>[ Core Capabilities ]</strong></a> &nbsp;&bull;&nbsp;
   <a href="#clinical-formulary-database"><strong>[ Medicine Catalogue ]</strong></a> &nbsp;&bull;&nbsp;
-  <a href="#whatsapp-pharmacy-refills"><strong>[ WhatsApp Refills ]</strong></a> &nbsp;&bull;&nbsp;
   <a href="#system-architecture"><strong>[ Architecture ]</strong></a> &nbsp;&bull;&nbsp;
   <a href="#local-development"><strong>[ Development ]</strong></a>
 </p>
@@ -29,17 +35,54 @@
 
 </div>
 
-## Repository Reference
+## Clinical System Overview
 
-| Metric | Target Specification |
-| :--- | :--- |
-| **Live Web Application** | [https://r2dapps.github.io/medic/](https://r2dapps.github.io/medic/) |
-| **Primary Repository** | [https://github.com/r2dapps/medic](https://github.com/r2dapps/medic) |
-| **Distribution Mirror** | [https://github.com/r2dapps/medic](https://github.com/r2dapps/medic) |
-| **Engineering Author** | **[Razel Tech](https://razeltech.github.io)** |
-| **Runtime Target** | Modern Web Browsers (Chrome, Edge, Safari, Firefox), Android PWA, iOS PWA |
-| **Data Engine** | 100% Client-Side W3C IndexedDB (16 Object Stores, Zero Remote Transmission) |
-| **Clinical Standards** | National List of Essential Medicines (NLEM 2022) &amp; CDSCO Formulations |
+<table>
+  <thead>
+    <tr>
+      <th align="left">System Metric</th>
+      <th align="left">Clinical Specification</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Live Web Application</strong></td>
+      <td><a href="https://r2dapps.github.io/medic/">https://r2dapps.github.io/medic/</a></td>
+    </tr>
+    <tr>
+      <td><strong>Primary Repository</strong></td>
+      <td><a href="https://github.com/r2dapps/medic">https://github.com/r2dapps/medic</a></td>
+    </tr>
+    <tr>
+      <td><strong>Upstream Engineering</strong></td>
+      <td><a href="https://github.com/razeltech/medic">https://github.com/razeltech/medic</a></td>
+    </tr>
+    <tr>
+      <td><strong>Publishing Organization</strong></td>
+      <td><strong><a href="https://r2dapps.github.io">R2D Apps</a></strong></td>
+    </tr>
+    <tr>
+      <td><strong>Engineering Author</strong></td>
+      <td><strong><a href="https://razeltech.github.io">Razel Tech</a></strong></td>
+    </tr>
+    <tr>
+      <td><strong>Runtime Target</strong></td>
+      <td>Modern Web Browsers (Chrome, Edge, Safari, Firefox), Android PWA, iOS PWA</td>
+    </tr>
+    <tr>
+      <td><strong>Data Engine</strong></td>
+      <td>100% Client-Side W3C IndexedDB (16 Object Stores, Zero Remote Transmission)</td>
+    </tr>
+    <tr>
+      <td><strong>Clinical Standards</strong></td>
+      <td>National List of Essential Medicines (NLEM 2022) &amp; CDSCO Formulations</td>
+    </tr>
+    <tr>
+      <td><strong>Audio Synthesizer</strong></td>
+      <td>Harmonic Web Audio Tri-Tone Chimes (D5-A5-D6) with Exponential Decay</td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
@@ -67,7 +110,7 @@
 - Inspects a patient's pre-diagnosed clinical conditions (e.g., *Type 2 Diabetes, Primary Hypertension*).
 - Form automatically highlights and pre-selects relevant condition chips to accelerate prescription entry without manual classification errors.
 
-### 4. Natural Indian Accent Voice Assistance
+### 4. Natural Accent Voice Assistance
 - Dedicated speech synthesis prioritization engine configured for natural Indian phonetics:
   - **Windows &amp; Edge**: Prioritizes `Microsoft Aarti Online (Natural)`, `Heera`, or `Neerja`.
   - **Apple Safari (iOS &amp; macOS)**: Prioritizes `Rishi`, `Sangeeta`, `Veena`, `Lekha`, or `Neel`.
@@ -102,16 +145,72 @@
 
 ## Clinical Formulary Database
 
-| Clinical Classification | Reference Formulations | Standard Food Timing | Primary Regulatory Basis |
-| :--- | :--- | :--- | :--- |
-| **Cardiology &amp; BP** | Telma 40, Telma AM, Amlong 5, Cilacar 10, Starpress XL 50 | After Food | CDSCO / NLEM 2022 |
-| **Endocrinology (Diabetes)** | Glycomet 500, Glycomet-GP 1/2, Januvia 100, Galvus 50 | Before / With Food | NLEM 2022 |
-| **Gastroenterology** | Pan 40, Pan-D, Omez 20, Pantocid 40, Gelusil | Before Food (Empty Stomach) | NLEM 2022 |
-| **Analgesics &amp; Antipyretics** | Dolo 650, Calpol 650, Combiflam, Zerodol-P | After Food | CDSCO / NLEM 2022 |
-| **Thyroid Management** | Thyronorm 25/50/75/100 mcg, Eltroxin | Early Morning (Empty Stomach) | CDSCO |
-| **Pulmonology (Asthma)** | Asthalin 100 mcg Inhaler, Budecort, Montair LC | Anytime / Night | NLEM 2022 |
-| **Nutritional Supplements** | Becosules Z, Neurobion Forte, Shelcal 500, Evion 400 | After Food | CDSCO |
-| **Infectious Diseases** | Augmentin 625 Duo, Azithral 500, Taxim-O 200 | After Food | CDSCO / NLEM 2022 |
+<details open>
+<summary><strong>NLEM 2022 &amp; CDSCO Formulary Classification Reference</strong></summary>
+<br/>
+
+<table>
+  <thead>
+    <tr>
+      <th align="left">Clinical Classification</th>
+      <th align="left">Reference Formulations</th>
+      <th align="left">Standard Food Timing</th>
+      <th align="left">Primary Regulatory Basis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Cardiology &amp; BP</strong></td>
+      <td>Telma 40, Telma AM, Amlong 5, Cilacar 10, Starpress XL 50</td>
+      <td>After Food</td>
+      <td>CDSCO / NLEM 2022</td>
+    </tr>
+    <tr>
+      <td><strong>Endocrinology (Diabetes)</strong></td>
+      <td>Glycomet 500, Glycomet-GP 1/2, Januvia 100, Galvus 50</td>
+      <td>Before / With Food</td>
+      <td>NLEM 2022</td>
+    </tr>
+    <tr>
+      <td><strong>Gastroenterology</strong></td>
+      <td>Pan 40, Pan-D, Omez 20, Pantocid 40, Gelusil</td>
+      <td>Before Food (Empty Stomach)</td>
+      <td>NLEM 2022</td>
+    </tr>
+    <tr>
+      <td><strong>Analgesics &amp; Antipyretics</strong></td>
+      <td>Dolo 650, Calpol 650, Combiflam, Zerodol-P</td>
+      <td>After Food</td>
+      <td>CDSCO / NLEM 2022</td>
+    </tr>
+    <tr>
+      <td><strong>Thyroid Management</strong></td>
+      <td>Thyronorm 25/50/75/100 mcg, Eltroxin</td>
+      <td>Early Morning (Empty Stomach)</td>
+      <td>CDSCO</td>
+    </tr>
+    <tr>
+      <td><strong>Pulmonology (Asthma)</strong></td>
+      <td>Asthalin 100 mcg Inhaler, Budecort, Montair LC</td>
+      <td>Anytime / Night</td>
+      <td>NLEM 2022</td>
+    </tr>
+    <tr>
+      <td><strong>Nutritional Supplements</strong></td>
+      <td>Becosules Z, Neurobion Forte, Shelcal 500, Evion 400</td>
+      <td>After Food</td>
+      <td>CDSCO</td>
+    </tr>
+    <tr>
+      <td><strong>Infectious Diseases</strong></td>
+      <td>Augmentin 625 Duo, Azithral 500, Taxim-O 200</td>
+      <td>After Food</td>
+      <td>CDSCO / NLEM 2022</td>
+    </tr>
+  </tbody>
+</table>
+
+</details>
 
 ---
 
@@ -166,6 +265,6 @@ Navigate to `http://localhost:8000` or `http://localhost:3000` in any modern bro
 
 ## License &amp; Mandatory Attribution
 
-Copyright (c) 2026 **[Razel Tech](https://razeltech.github.io)**. All rights reserved.
+Copyright (c) 2026 **[Razel Tech](https://razeltech.github.io)** and **[R2D Apps](https://r2dapps.github.io)**. All rights reserved.
 
-Licensed under the **MIT License with Mandatory Author Attribution**. Any public deployment, mirror, or distribution must attribute the author as **Razel Tech** and include an active hyperlink to [https://razeltech.github.io](https://razeltech.github.io).
+Licensed under the **MIT License with Mandatory Author Attribution**. Any public deployment, mirror, or distribution must attribute the author as **Razel Tech** and include active hyperlinks to [https://razeltech.github.io](https://razeltech.github.io) and [https://r2dapps.github.io](https://r2dapps.github.io).
