@@ -54,7 +54,21 @@
         withFood: 'With Food',
         anytime: 'Anytime',
         listenAudio: 'Listen',
-        readingMedicine: 'Reading medicine instructions...'
+        readingMedicine: 'Reading medicine instructions...',
+        todayScheduleTab: "Today's Schedule",
+        calendarHistoryTab: "Dose Calendar",
+        adherenceRate: "Adherence",
+        activeStreak: "Streak",
+        dosesLogged: "Logged",
+        todayBtn: "Today",
+        doseLogFor: "Dose Log for",
+        allTaken: "All Taken",
+        partialTaken: "Partial",
+        missed: "Missed",
+        noMedsScheduled: "No medicines scheduled for this day.",
+        daysStreak: "Days",
+        weekdaysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
       },
       te: {
         appName: 'MEDIC',
@@ -103,7 +117,21 @@
         withFood: 'భోజనంతో పాటు (With Food)',
         anytime: 'ఎప్పుడైనా (Anytime)',
         listenAudio: 'వినండి',
-        readingMedicine: 'మందుల వివరాలు చదువుతోంది...'
+        readingMedicine: 'మందుల వివరాలు చదువుతోంది...',
+        todayScheduleTab: "నేటి షెడ్యూల్",
+        calendarHistoryTab: "క్యాలెండర్ చరిత్ర",
+        adherenceRate: "క్రమశిక్షణ",
+        activeStreak: "వరుస రోజులు",
+        dosesLogged: "నమోదైనవి",
+        todayBtn: "ఈ రోజు",
+        doseLogFor: "తేదీ మందుల వివరాలు",
+        allTaken: "అన్నీ వేసుకున్నారు",
+        partialTaken: "కొన్ని మాత్రమే",
+        missed: "మిస్ అయ్యాయి",
+        noMedsScheduled: "ఈ రోజు ఎలాంటి మందులు నిర్ణయించబడలేదు.",
+        daysStreak: "రోజులు",
+        weekdaysShort: ['ఆది', 'సోమ', 'మంగళ', 'బుధ', 'గురు', 'శుక్ర', 'శని'],
+        months: ['జనవరి', 'ఫిబ్రవరి', 'మార్చి', 'ఏప్రిల్', 'మే', 'జూన్', 'జూలై', 'ఆగస్టు', 'సెప్టెంబర్', 'అక్టోబర్', 'నవంబర్', 'డిసెంబర్']
       },
       hi: {
         appName: 'MEDIC',
@@ -152,7 +180,21 @@
         withFood: 'खाने के साथ (With Food)',
         anytime: 'किसी भी समय (Anytime)',
         listenAudio: 'सुनें',
-        readingMedicine: 'दवा का विवरण सुनाया जा रहा है...'
+        readingMedicine: 'दवा का विवरण सुनाया जा रहा है...',
+        todayScheduleTab: "आज का शेड्यूल",
+        calendarHistoryTab: "कैलेंडर इतिहास",
+        adherenceRate: "अनुपालन",
+        activeStreak: "लगातार दिन",
+        dosesLogged: "दर्ज खुराकें",
+        todayBtn: "आज",
+        doseLogFor: "तारीख का दवा विवरण",
+        allTaken: "सभी खुराकें ली गईं",
+        partialTaken: "कुछ खुराकें ली गईं",
+        missed: "छूट गईं",
+        noMedsScheduled: "इस दिन के लिए कोई दवा निर्धारित नहीं है।",
+        daysStreak: "दिन",
+        weekdaysShort: ['रवि', 'सोम', 'मंगल', 'बुध', 'गुरु', 'शुक्र', 'शनि'],
+        months: ['जनवरी', 'फरवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर']
       }
     };
 
@@ -288,8 +330,22 @@
         notifications: false,
         language: 'en',
         fontSize: 'normal'
+      },
+      calendar: {
+        selectedYear: new Date().getFullYear(),
+        selectedMonth: new Date().getMonth(),
+        selectedDateKey: formatDateKey(new Date()),
+        viewMode: 'today'
       }
     };
+
+    // --- Deterministic Timezone-Safe Date Key Formatter ---
+    function formatDateKey(dateObj) {
+      const y = dateObj.getFullYear();
+      const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const d = String(dateObj.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
 
     // --- Custom UI Confirmation Modal Helper ---
     function customConfirm(title, message) {
@@ -459,6 +515,17 @@
       document.getElementById('t-backupSub').textContent = t.backupSub;
       document.getElementById('t-exportBtn').textContent = t.exportBackup;
       document.getElementById('t-restoreBtn').textContent = t.restoreBackup;
+
+      // Calendar & Dose History Localized Labels
+      if (document.getElementById('t-todayScheduleTab')) document.getElementById('t-todayScheduleTab').textContent = t.todayScheduleTab;
+      if (document.getElementById('t-calendarHistoryTab')) document.getElementById('t-calendarHistoryTab').textContent = t.calendarHistoryTab;
+      if (document.getElementById('t-adherenceRate')) document.getElementById('t-adherenceRate').textContent = t.adherenceRate;
+      if (document.getElementById('t-activeStreak')) document.getElementById('t-activeStreak').textContent = t.activeStreak;
+      if (document.getElementById('t-dosesLogged')) document.getElementById('t-dosesLogged').textContent = t.dosesLogged;
+      if (document.getElementById('calTodayBtn')) document.getElementById('calTodayBtn').textContent = t.todayBtn;
+      if (document.getElementById('t-legAll')) document.getElementById('t-legAll').textContent = t.allTaken;
+      if (document.getElementById('t-legPartial')) document.getElementById('t-legPartial').textContent = t.partialTaken;
+      if (document.getElementById('t-legMissed')) document.getElementById('t-legMissed').textContent = t.missed;
     }
 
     // --- MULTILINGUAL SCHEDULE & TIMING HELPERS ---
@@ -990,6 +1057,382 @@
       });
     }
 
+    // --- CALENDAR & DOSE HISTORY ENGINE ---
+    async function computeMonthAdherenceData(year, month) {
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const firstDayIndex = new Date(year, month, 1).getDay();
+      const todayKey = formatDateKey(new Date());
+
+      const allHistory = await dbGetAll('DoseHistory');
+      const historyMap = {};
+      allHistory.forEach(d => {
+        historyMap[`${d.dateKey}_${d.medicineId}_${d.timeSlot}`] = d;
+      });
+
+      const dayStatusMap = {};
+      let totalScheduledUpToToday = 0;
+      let totalTakenUpToToday = 0;
+
+      const activeMeds = AppState.medicines.filter(m => {
+        return AppState.activeMemberId === 'ALL' || m.memberId === AppState.activeMemberId;
+      });
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const doses = [];
+
+        activeMeds.forEach(med => {
+          (med.schedules || []).forEach(slot => {
+            const hist = historyMap[`${dateKey}_${med.id}_${slot}`];
+            const member = AppState.members.find(m => m.id === med.memberId);
+            doses.push({
+              medicineId: med.id,
+              medicineName: med.brand,
+              strength: med.strength,
+              dosageForm: med.dosageForm,
+              unitsPerDose: med.unitsPerDose || 1,
+              foodTiming: med.foodTiming,
+              memberId: med.memberId,
+              memberName: member ? member.name : 'Family Member',
+              timeSlot: slot,
+              status: hist ? hist.status : (dateKey > todayKey ? 'UPCOMING' : 'PENDING'),
+              recordedTime: hist ? hist.recordedTime : null,
+              dateKey
+            });
+          });
+        });
+
+        const scheduled = doses.length;
+        const taken = doses.filter(d => d.status === 'TAKEN').length;
+        const skipped = doses.filter(d => d.status === 'SKIPPED').length;
+
+        let compliance = 'NO_DOSES';
+        if (scheduled > 0) {
+          if (dateKey > todayKey && taken === 0 && skipped === 0) {
+            compliance = 'FUTURE';
+          } else if (taken === scheduled) {
+            compliance = 'FULL';
+          } else if (taken > 0 || skipped > 0) {
+            compliance = 'PARTIAL';
+          } else {
+            compliance = 'MISSED';
+          }
+
+          if (dateKey <= todayKey) {
+            totalScheduledUpToToday += scheduled;
+            totalTakenUpToToday += taken;
+          }
+        }
+
+        dayStatusMap[dateKey] = {
+          day,
+          dateKey,
+          scheduled,
+          taken,
+          skipped,
+          compliance,
+          doses
+        };
+      }
+
+      const adherenceRate = totalScheduledUpToToday > 0 
+        ? Math.round((totalTakenUpToToday / totalScheduledUpToToday) * 100) 
+        : 100;
+
+      // Active Streak: Consecutive full adherence days up to today
+      let streak = 0;
+      const cursor = new Date();
+      while (true) {
+        const cKey = formatDateKey(cursor);
+        const st = dayStatusMap[cKey];
+        if (!st) {
+          if (cKey < `${year}-${String(month + 1).padStart(2, '0')}-01`) break;
+        } else {
+          if (st.scheduled > 0) {
+            if (st.compliance === 'FULL') {
+              streak++;
+            } else {
+              break;
+            }
+          }
+        }
+        cursor.setDate(cursor.getDate() - 1);
+        if (streak > 365) break;
+      }
+
+      return {
+        daysInMonth,
+        firstDayIndex,
+        todayKey,
+        dayStatusMap,
+        totalScheduledUpToToday,
+        totalTakenUpToToday,
+        adherenceRate,
+        streak
+      };
+    }
+
+    async function renderCalendarScreen() {
+      const todaySection = document.getElementById('todayScheduleSection');
+      const calSection = document.getElementById('calendarHistorySection');
+      const btnToday = document.getElementById('btnViewTodaySchedule');
+      const btnCal = document.getElementById('btnViewCalendarHistory');
+
+      if (!todaySection || !calSection || !btnToday || !btnCal) return;
+
+      const isCal = AppState.calendar.viewMode === 'calendar';
+      if (isCal) {
+        todaySection.classList.add('hidden');
+        calSection.classList.remove('hidden');
+        btnCal.className = 'flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all bg-white shadow-xs text-teal-primary flex items-center justify-center gap-1.5 touch-target';
+        btnToday.className = 'flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all text-charcoal-muted hover:text-charcoal flex items-center justify-center gap-1.5 touch-target';
+      } else {
+        todaySection.classList.remove('hidden');
+        calSection.classList.add('hidden');
+        btnToday.className = 'flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all bg-white shadow-xs text-teal-primary flex items-center justify-center gap-1.5 touch-target';
+        btnCal.className = 'flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all text-charcoal-muted hover:text-charcoal flex items-center justify-center gap-1.5 touch-target';
+        return;
+      }
+
+      const lang = (AppState.settings && AppState.settings.language) || 'en';
+      const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
+      const calData = await computeMonthAdherenceData(AppState.calendar.selectedYear, AppState.calendar.selectedMonth);
+
+      // 1. Stats Cards
+      const statAdh = document.getElementById('calStatAdherence');
+      const statStreak = document.getElementById('calStatStreak');
+      const statLogged = document.getElementById('calStatLogged');
+      if (statAdh) statAdh.textContent = `${calData.adherenceRate}%`;
+      if (statStreak) statStreak.textContent = `${calData.streak} ${t.daysStreak || 'Days'}`;
+      if (statLogged) statLogged.textContent = `${calData.totalTakenUpToToday}/${calData.totalScheduledUpToToday}`;
+
+      // 2. Month Navigation Title
+      const monthTitle = document.getElementById('calCurrentMonthYear');
+      if (monthTitle) {
+        const mName = (t.months && t.months[AppState.calendar.selectedMonth]) || 'Month';
+        monthTitle.textContent = `${mName} ${AppState.calendar.selectedYear}`;
+      }
+
+      // 3. Weekday Headers
+      const weekdayContainer = document.getElementById('calWeekdayHeader');
+      if (weekdayContainer && t.weekdaysShort) {
+        weekdayContainer.innerHTML = t.weekdaysShort.map(w => `
+          <div class="text-[11px] font-bold text-charcoal-muted uppercase tracking-wider py-0.5">${w}</div>
+        `).join('');
+      }
+
+      // 4. Days Grid
+      const daysGrid = document.getElementById('calDaysGrid');
+      if (daysGrid) {
+        daysGrid.innerHTML = '';
+
+        // Preceding blank padding cells
+        for (let i = 0; i < calData.firstDayIndex; i++) {
+          const blank = document.createElement('div');
+          blank.className = 'aspect-square min-h-[38px] opacity-0 pointer-events-none';
+          daysGrid.appendChild(blank);
+        }
+
+        // Days 1 .. N
+        for (let day = 1; day <= calData.daysInMonth; day++) {
+          const dateKey = `${AppState.calendar.selectedYear}-${String(AppState.calendar.selectedMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+          const dayInfo = calData.dayStatusMap[dateKey] || { scheduled: 0, taken: 0, compliance: 'NO_DOSES' };
+          const isSelected = dateKey === AppState.calendar.selectedDateKey;
+          const isToday = dateKey === calData.todayKey;
+
+          let dotClass = '';
+          if (dayInfo.compliance === 'FULL') {
+            dotClass = 'bg-status-success';
+          } else if (dayInfo.compliance === 'PARTIAL') {
+            dotClass = 'bg-status-warning';
+          } else if (dayInfo.compliance === 'MISSED') {
+            dotClass = 'bg-status-danger';
+          }
+
+          const dayCell = document.createElement('button');
+          dayCell.type = 'button';
+          dayCell.className = `aspect-square min-h-[38px] flex flex-col items-center justify-center rounded-xl p-1 transition-all touch-target text-center relative ${
+            isSelected 
+              ? 'ring-2 ring-teal-primary bg-teal-subtle text-teal-primary font-black shadow-xs' 
+              : isToday 
+                ? 'border border-teal-primary/50 bg-teal-50/30 text-charcoal font-bold' 
+                : 'hover:bg-surface-subtle text-charcoal font-semibold'
+          }`;
+
+          dayCell.innerHTML = `
+            <span class="text-xs leading-none">${day}</span>
+            <div class="h-1.5 flex items-center justify-center mt-0.5">
+              ${dotClass ? `<span class="w-1.5 h-1.5 rounded-full ${dotClass}"></span>` : ''}
+            </div>
+          `;
+
+          dayCell.addEventListener('click', () => {
+            triggerHaptic('light');
+            AppState.calendar.selectedDateKey = dateKey;
+            renderCalendarScreen();
+          });
+
+          daysGrid.appendChild(dayCell);
+        }
+      }
+
+      // 5. Selected Day Detail Drawer
+      renderCalendarDayDetails(calData);
+      lucide.createIcons();
+    }
+
+    function renderCalendarDayDetails(calData) {
+      const heading = document.getElementById('calSelectedDateHeading');
+      const badge = document.getElementById('calSelectedDayBadge');
+      const list = document.getElementById('calSelectedDoseList');
+      if (!heading || !badge || !list) return;
+
+      const lang = (AppState.settings && AppState.settings.language) || 'en';
+      const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
+      const selKey = AppState.calendar.selectedDateKey || calData.todayKey;
+      const dayInfo = calData.dayStatusMap[selKey] || { scheduled: 0, taken: 0, doses: [] };
+
+      // Format selected date heading
+      const parts = selKey.split('-');
+      const dObj = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+      heading.textContent = dObj.toLocaleDateString(lang === 'te' ? 'te-IN' : lang === 'hi' ? 'hi-IN' : 'en-IN', {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
+
+      badge.textContent = `${dayInfo.taken}/${dayInfo.scheduled} ${t.taken || 'Taken'}`;
+      if (dayInfo.compliance === 'FULL') {
+        badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-status-success';
+      } else if (dayInfo.compliance === 'PARTIAL') {
+        badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-status-warning';
+      } else if (dayInfo.compliance === 'MISSED') {
+        badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-status-danger';
+      } else {
+        badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold bg-surface-subtle text-charcoal-muted';
+      }
+
+      list.innerHTML = '';
+      if (!dayInfo.doses || dayInfo.doses.length === 0) {
+        list.innerHTML = `
+          <div class="p-5 text-center text-xs text-charcoal-muted bg-surface-subtle rounded-xl border border-surface-border">
+            ${t.noMedsScheduled || 'No medicines scheduled for this day.'}
+          </div>
+        `;
+        return;
+      }
+
+      dayInfo.doses.forEach(dose => {
+        const isTaken = dose.status === 'TAKEN';
+        const isSkipped = dose.status === 'SKIPPED';
+        const isToday = selKey === calData.todayKey;
+
+        const card = document.createElement('div');
+        card.className = `p-3 bg-surface-subtle border border-surface-border rounded-xl transition-all ${
+          isTaken ? 'bg-emerald-50/40 border-emerald-200' : isSkipped ? 'bg-amber-50/40 border-amber-200' : ''
+        }`;
+
+        let statusBadgeHtml = '';
+        if (isTaken) {
+          statusBadgeHtml = `<span class="inline-flex items-center gap-1 text-[10px] font-bold text-status-success bg-emerald-100 px-2 py-0.5 rounded-md"><i data-lucide="check" class="w-3 h-3"></i> ${t.taken || 'Taken'} ${dose.recordedTime || ''}</span>`;
+        } else if (isSkipped) {
+          statusBadgeHtml = `<span class="inline-flex items-center gap-1 text-[10px] font-bold text-status-warning bg-amber-100 px-2 py-0.5 rounded-md"><i data-lucide="skip-forward" class="w-3 h-3"></i> ${t.skip || 'Skipped'}</span>`;
+        } else if (dose.status === 'UPCOMING') {
+          statusBadgeHtml = `<span class="text-[10px] font-semibold text-charcoal-muted bg-white border border-surface-border px-2 py-0.5 rounded-md">Scheduled</span>`;
+        } else {
+          statusBadgeHtml = `<span class="inline-flex items-center gap-1 text-[10px] font-bold text-status-danger bg-rose-100 px-2 py-0.5 rounded-md"><i data-lucide="clock" class="w-3 h-3"></i> ${t.missed || 'Missed'}</span>`;
+        }
+
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-2">
+            <div class="min-w-0 flex-1 space-y-1">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="font-bold text-sm text-charcoal truncate">${dose.medicineName}</span>
+                <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-white border border-surface-border text-charcoal-muted">${dose.strength || ''}</span>
+                <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-teal-subtle text-teal-primary">${dose.memberName}</span>
+              </div>
+              <div class="text-xs text-charcoal-muted flex items-center gap-1.5 flex-wrap">
+                <span>${localizeTimeSlot(dose.timeSlot, lang)}</span>
+                <span>•</span>
+                <span>${localizeFoodTiming(dose.foodTiming, lang)}</span>
+              </div>
+            </div>
+            <div class="shrink-0 flex flex-col items-end gap-1.5">
+              ${statusBadgeHtml}
+              ${isToday && !isTaken ? `
+                <button class="record-take-btn text-[11px] font-bold bg-teal-primary text-white px-2.5 py-1 rounded-lg touch-target" data-medid="${dose.medicineId}" data-time="${dose.timeSlot}">
+                  Take
+                </button>
+              ` : ''}
+            </div>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    function initCalendarEvents() {
+      const btnToday = document.getElementById('btnViewTodaySchedule');
+      const btnCal = document.getElementById('btnViewCalendarHistory');
+      const btnPrev = document.getElementById('calPrevMonthBtn');
+      const btnNext = document.getElementById('calNextMonthBtn');
+      const btnJumpToday = document.getElementById('calTodayBtn');
+
+      if (btnToday) {
+        btnToday.addEventListener('click', () => {
+          triggerHaptic('light');
+          AppState.calendar.viewMode = 'today';
+          renderCalendarScreen();
+        });
+      }
+
+      if (btnCal) {
+        btnCal.addEventListener('click', () => {
+          triggerHaptic('light');
+          AppState.calendar.viewMode = 'calendar';
+          renderCalendarScreen();
+        });
+      }
+
+      if (btnPrev) {
+        btnPrev.addEventListener('click', () => {
+          triggerHaptic('light');
+          if (AppState.calendar.selectedMonth === 0) {
+            AppState.calendar.selectedMonth = 11;
+            AppState.calendar.selectedYear--;
+          } else {
+            AppState.calendar.selectedMonth--;
+          }
+          renderCalendarScreen();
+        });
+      }
+
+      if (btnNext) {
+        btnNext.addEventListener('click', () => {
+          triggerHaptic('light');
+          if (AppState.calendar.selectedMonth === 11) {
+            AppState.calendar.selectedMonth = 0;
+            AppState.calendar.selectedYear++;
+          } else {
+            AppState.calendar.selectedMonth++;
+          }
+          renderCalendarScreen();
+        });
+      }
+
+      if (btnJumpToday) {
+        btnJumpToday.addEventListener('click', () => {
+          triggerHaptic('light');
+          const now = new Date();
+          AppState.calendar.selectedYear = now.getFullYear();
+          AppState.calendar.selectedMonth = now.getMonth();
+          AppState.calendar.selectedDateKey = formatDateKey(now);
+          renderCalendarScreen();
+        });
+      }
+    }
+
     // --- TRANSACTIONAL PURCHASE RECORDING & EDITING ---
     async function savePurchaseTransactional(purchaseData, itemsList, isEdit = false) {
       if (AppState.activeRole === 'FAMILY_MEMBER') {
@@ -1196,6 +1639,7 @@
     function renderAll() {
       renderProfileHeader();
       renderHomeScreen();
+      renderCalendarScreen();
       renderFamilyScreen();
       renderMedicinesScreen();
       renderPurchasesScreen();
@@ -3441,6 +3885,7 @@
         const isFreshUser = households.length === 0;
 
         initNavigation();
+        initCalendarEvents();
         initOcrUI();
         initModals();
         initForms();
